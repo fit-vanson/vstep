@@ -1,10 +1,10 @@
 <?php
 
-namespace Vanguard\Http\Requests\Categories;
+namespace Vanguard\Http\Requests\Khoahoc;
 
 use Vanguard\Http\Requests\Request;
 
-class UpdateCategoryRequest extends Request
+class UpdateKhoahocRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.
@@ -13,10 +13,10 @@ class UpdateCategoryRequest extends Request
      */
     public function rules()
     {
-        $category = $this->route('category');
+        $category = $this->route('khoahoc');
         return [
 //            'cate_name' => 'required|regex:/^[a-zA-Z0-9\-_\.]+$/|unique:categories,cate_name,' . $category->id
-            'cate_name' => 'required|unique:categories,cate_name,' . $category->id
+            'khoahoc_name' => 'required|unique:khoa_hocs,khoahoc_name,' . $category->id
         ];
     }
 }

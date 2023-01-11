@@ -13,6 +13,11 @@ class Categories extends Model
         'removable' => 'boolean'
     ];
     protected $fillable = ['cate_name'];
+
+    public function khoahoc()
+    {
+        return $this->hasMany(KhoaHoc::class, 'cate_id');
+    }
     public function users()
     {
 

@@ -21,9 +21,10 @@ class CategoriesController extends Controller
         $this->middleware('permission:categories.manage');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('categories.index', ['categories' => $this->categories->all()]);
+        $categories = $this->categories->paginate($perPage = 20, $request->search);
+        return view('categories.index', compact('categories'));
     }
     public function create()
     {

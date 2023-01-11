@@ -6,6 +6,7 @@ use Vanguard\Categories;
 use Vanguard\Events\Categories\Created;
 use Vanguard\Events\Categories\Deleted;
 use Vanguard\Events\Categories\Updated;
+use Vanguard\Http\Filters\CategoryKeywordSearch;
 
 
 class EloquentCategories implements CategoriesRepository
@@ -16,6 +17,24 @@ class EloquentCategories implements CategoriesRepository
     public function all()
     {
         return Categories::all();
+    }
+
+    public function paginate($perPage, $search = null)
+    {
+        $query = Categories::query();
+
+        if ($search) {
+            (new CategoryKeywordSearch)($query, $search);
+        }
+
+        $result = $query->orderBy('id', 'desc')
+            ->paginate($perPage);
+
+        if ($search) {
+            $result->appends(['search' => $search]);
+        }
+
+        return $result;
     }
 
     /**
@@ -84,7 +103,7 @@ class EloquentCategories implements CategoriesRepository
     /**
      * {@inheritdoc}
      */
-    public function lists($column = 'name', $key = 'id')
+    public function lists($column = 'cate_name', $key = 'id')
     {
         return Categories::pluck($column, $key);
     }
@@ -94,6 +113,6 @@ class EloquentCategories implements CategoriesRepository
      */
     public function findByName($name)
     {
-        return Categories::where('name', $name)->first();
+        return Categories::where('cate_name', $name)->first();
     }
 }

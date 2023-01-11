@@ -1,10 +1,11 @@
 <?php
 
-namespace Vanguard\Repositories\Categories;
+namespace Vanguard\Repositories\Khoahoc;
 
-use Vanguard\Categories;
+use Vanguard\Khoahoc;
 
-interface CategoriesRepository
+
+interface KhoahocRepository
 {
     /**
      * Get all system roles.
@@ -13,7 +14,7 @@ interface CategoriesRepository
      */
     public function all();
 
-    public function paginate($perPage, $search = null);
+    public function paginate($perPage, $search = null, $cate_id = null);
 
     /**
      * Lists all system roles into $key => $column value pairs.
@@ -22,7 +23,7 @@ interface CategoriesRepository
      * @param string $key
      * @return mixed
      */
-    public function lists($column = 'cate_name', $key = 'id');
+    public function lists($column = 'khoahoc_name', $key = 'id');
 
     /**
      * Get all system roles with number of users for each role.
@@ -34,8 +35,8 @@ interface CategoriesRepository
     /**
      * Find system role by id.
      *
-     * @param $id Categories Id
-     * @return Categories|null
+     * @param $id Khoahoc Id
+     * @return Khoahoc|null
      */
     public function find($id);
 
@@ -51,23 +52,23 @@ interface CategoriesRepository
      * Create new system role.
      *
      * @param array $data
-     * @return Categories
+     * @return Khoahoc
      */
     public function create(array $data);
 
     /**
      * Update specified role.
      *
-     * @param $id Categories Id
+     * @param $id Khoahoc Id
      * @param array $data
-     * @return Categories
+     * @return Khoahoc
      */
     public function update($id, array $data);
 
     /**
      * Remove role from repository.
      *
-     * @param $id Categories Id
+     * @param $id Khoahoc Id
      * @return bool
      */
     public function delete($id);

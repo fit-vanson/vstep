@@ -1,10 +1,10 @@
 <?php
 
-namespace Vanguard\Http\Requests\Categories;
+namespace Vanguard\Http\Requests\Baihoc;
 
 use Vanguard\Http\Requests\Request;
 
-class UpdateCategoryRequest extends Request
+class UpdateBaihocRequest extends Request
 {
     /**
      * Get the validation rules that apply to the request.
@@ -13,10 +13,10 @@ class UpdateCategoryRequest extends Request
      */
     public function rules()
     {
-        $category = $this->route('category');
+        $baihoc = $this->route('baihoc');
         return [
 //            'cate_name' => 'required|regex:/^[a-zA-Z0-9\-_\.]+$/|unique:categories,cate_name,' . $category->id
-            'cate_name' => 'required|unique:categories,cate_name,' . $category->id
+            'baihoc_name' => 'required|unique:baihocs,baihoc_name,' . $baihoc->id
         ];
     }
 }

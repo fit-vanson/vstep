@@ -144,28 +144,23 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::resource('categories', 'CategoriesController')
         ->except('show')->middleware('permission:categories.manage');
-
-    Route::group(['prefix' => 'categories/{categories}', 'middleware' => 'permission:categories.manage'], function () {
-//        Route::put('update/details', 'Users\DetailsController@update')->name('users.update.details');
-//        Route::put('update/login-details', 'Users\LoginDetailsController@update')
-//            ->name('users.update.login-details');
-//
-//        Route::post('update/avatar', 'Users\AvatarController@update')->name('user.update.avatar');
-//        Route::post('update/avatar/external', 'Users\AvatarController@updateExternal')
-//            ->name('user.update.avatar.external');
-//
-//        Route::get('sessions', 'Users\SessionsController@index')
-//            ->name('user.sessions')->middleware('session.database');
-//
-//        Route::delete('sessions/{session}/invalidate', 'Users\SessionsController@destroy')
-//            ->name('user.sessions.invalidate')->middleware('session.database');
-//
-//        Route::post('two-factor/enable', 'TwoFactorController@enable')->name('user.two-factor.enable');
-//        Route::post('two-factor/disable', 'TwoFactorController@disable')->name('user.two-factor.disable');
-    });
-//    Route::group(['prefix' => 'categories'], function () {
-//        Route::get('/', 'CategoriesController@index')->name('categories.index');
+//    Route::group(['prefix' => 'categories/{categories}', 'middleware' => 'permission:categories.manage'], function () {
 //    });
+
+    /**
+     * Khoc hoc
+     */
+
+    Route::resource('khoahoc', 'KhoaHocController')
+        ->except('show')->middleware('permission:khoahoc.manage');
+
+    /**
+     * Bai hoc
+     */
+
+    Route::resource('baihoc', 'BaihocController')
+        ->except('show')->middleware('permission:baihoc.manage');
+
 
 
     /**
