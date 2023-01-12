@@ -9,6 +9,7 @@ use Vanguard\Events\User\Deleted;
 use Vanguard\Http\Controllers\Controller;
 use Vanguard\Http\Requests\User\CreateUserRequest;
 use Vanguard\Repositories\Activity\ActivityRepository;
+use Vanguard\Repositories\Baihoc\BaihocRepository;
 use Vanguard\Repositories\Country\CountryRepository;
 use Vanguard\Repositories\Role\RoleRepository;
 use Vanguard\Repositories\User\UserRepository;
@@ -46,9 +47,10 @@ class UsersController extends Controller
      * @param User $user
      * @return Factory|View
      */
-    public function show(User $user)
+    public function show(User $user,BaihocRepository $baihocRepository)
     {
-        return view('user.view', compact('user'));
+        $baihoc = $baihocRepository->all();
+        return view('user.view', compact('user','baihoc'));
     }
 
     /**

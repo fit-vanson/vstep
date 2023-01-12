@@ -137,7 +137,7 @@ class EloquentBaihoc implements BaihocRepository
     /**
      * {@inheritdoc}
      */
-    public function lists($column = 'name', $key = 'id')
+    public function lists($column = 'baihoc_name', $key = 'id')
     {
         return Baihoc::pluck($column, $key);
     }

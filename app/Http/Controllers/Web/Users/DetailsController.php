@@ -63,4 +63,28 @@ class DetailsController extends Controller
         return $user->status != $request->status
             && $request->status == UserStatus::BANNED;
     }
+
+    public function updateBaihoc(User $user, UpdateDetailsRequest $request)
+    {
+        $data = $request->all();
+        dd($data);
+
+        if (! data_get($data, 'country_id')) {
+            $data['country_id'] = null;
+        }
+
+        $this->users->update($user->id, $data);
+        $this->users->setRole($user->id, $request->role_id);
+
+        event(new UpdatedByAdmin($user));
+
+        // If user status was updated to "Banned",
+        // fire the appropriate event.
+        if ($this->userWasBanned($user, $request)) {
+            event(new Banned($user));
+        }
+
+        return redirect()->back()
+            ->withSuccess(__('User updated successfully.'));
+    }
 }

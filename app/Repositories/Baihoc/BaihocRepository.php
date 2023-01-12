@@ -23,7 +23,7 @@ interface BaihocRepository
      * @param string $key
      * @return mixed
      */
-    public function lists($column = 'cate_name', $key = 'id');
+    public function lists($column = 'baihoc_name', $key = 'id');
 
     /**
      * Get all system roles with number of users for each role.

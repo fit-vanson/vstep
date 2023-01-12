@@ -125,6 +125,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::group(['prefix' => 'users/{user}', 'middleware' => 'permission:users.manage'], function () {
         Route::put('update/details', 'Users\DetailsController@update')->name('users.update.details');
+        Route::put('update/baihoc', 'Users\DetailsController@updateBaihoc')->name('users.update.baihoc');
         Route::put('update/login-details', 'Users\LoginDetailsController@update')
             ->name('users.update.login-details');
 

@@ -84,68 +84,81 @@
     </div>
 
     <div class="col-lg-7 col-xl-8">
-    <ul class="nav nav-pills mb-4 mt-2" id="pills-tab" role="tablist">
-        <li class="nav-item">
-            <a href="#bai_hoc"
-               class="nav-link active"
-               id="pills-home-tab"
-               data-toggle="pill"
-               aria-controls="pills-home"
-               aria-selected="true">
-                <i class="fas fa-graduation-cap"></i>
-                @lang('Bài học')
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="#latest_activity"
-               class="nav-link"
-               id="pills-home-tab"
-               data-toggle="pill"
-               aria-controls="pills-home"
-               aria-selected="true">
-                <i class="fas fa-chalkboard"></i>
-                @lang('Latest Activity')
-            </a>
-        </li>
-    </ul>
+        <ul class="nav nav-pills mb-4 mt-2" id="pills-tab" role="tablist">
 
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="bai_hoc">
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive" id="baihoc-table-wrapper">
-                <table class="table table-borderless table-striped">
-                    <thead>
-                    <tr>
-                        {{--                        <th></th>--}}
-                        <th class="min-width-40">@lang('Tên bài học')</th>
-                        <th class="min-width-20">@lang('Khoá học')</th>
-                        <th class="min-width-20">@lang('Link 1')</th>
-                        <th class="min-width-20">@lang('Link 2')</th>
-                        <th class="min-width-20">@lang('File')</th>
-                        <th class="text-center min-width-10">@lang('Action')</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-{{--                    @if (count($baihoc))--}}
-                        @foreach ($user->baihoc as $item)
-                            @include('baihoc.partials.row')
-                        @endforeach
-{{--                    @else--}}
-{{--                        <tr>--}}
-{{--                            <td colspan="7"><em>@lang('No records found.')</em></td>--}}
-{{--                        </tr>--}}
-{{--                    @endif--}}
-                    </tbody>
-                </table>
-            </div>
+            <li class="nav-item">
+                <a href="#latest_activity"
+                   class="nav-link active"
+                   id="pills-home-tab"
+                   data-toggle="pill"
+                   aria-controls="pills-home"
+                   aria-selected="true">
+                    <i class="fas fa-chalkboard"></i>
+                    @lang('Latest Activity')
+                </a>
+            </li>
+
+            @if($user->role->name ==='User')
+                <li class="nav-item">
+                    <a href="#bai_hoc"
+                       class="nav-link "
+                       id="pills-home-tab"
+                       data-toggle="pill"
+                       aria-controls="pills-home"
+                       aria-selected="true">
+                        <i class="fas fa-graduation-cap"></i>
+                        @lang('Bài học')
+                    </a>
+                </li>
+            @endif
+        </ul>
+        <div class="tab-content">
+        <div role="tabpanel" class="tab-pane" id="bai_hoc">
+            <form action="{{ route('users.update.baihoc', $user) }}" method="POST" id="baihoc-form">
+                @csrf
+                @method('PUT')
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive" id="baihoc-table-wrapper">
+                            <table class="table table-borderless table-striped">
+                                <thead>
+                                <tr>
+                                    <th class="min-width-40">@lang('Tên bài học')</th>
+                                    <th class="min-width-20">@lang('Khoá học')</th>
+                                    <th class="min-width-20">@lang('Link 1')</th>
+                                    <th class="min-width-20">@lang('Link 2')</th>
+                                    <th class="min-width-20">@lang('File')</th>
+                                    <th class="text-center min-width-10">@lang('Action')</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach ($baihoc as $item)
+                                        @include('user.partials.baihoc')
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary" id="upssssdate-details-btn">@lang('Save')</button>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div role="tabpanel" class="tab-pane" id="latest_activity">
+        <div role="tabpanel" class="tab-pane active" id="latest_activity">
             @include("user-activity::recent-activity", ['activities' => $activities])
         </div>
     </div>
     </div>
 </div>
+@stop
+
+@section('scripts')
+    {!! HTML::script('assets/js/as/btn.js') !!}
+    {!! HTML::script('assets/js/as/profile.js') !!}
+    {!! JsValidator::formRequest('Vanguard\Http\Requests\User\UpdateBaihocRequest', '#baihoc-form') !!}
+
 @stop
