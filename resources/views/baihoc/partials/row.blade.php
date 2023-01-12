@@ -1,18 +1,20 @@
 <tr>
 
     <td class="align-middle">
-{{--        <a href="{{ route('categories.show', $category) }}">--}}
-            {{ $item->baihoc_name ?: __('N/A') }}
-{{--        </a>--}}
+        {{ $item->baihoc_name ?: __('N/A') }}
     </td>
-    <td class="align-middle">{{($item->khoahoc->khoahoc_name)}}</td>
-{{--    <td class="align-middle">{{ $item->category->cate_name }}</td>--}}
-{{--    <td class="align-middle">{{ $user->created_at->format(config('app.date_format')) }}</td>--}}
-{{--    <td class="align-middle">--}}
-{{--        <span class="badge badge-lg badge-{{ $user->present()->labelClass }}">--}}
-{{--            {{ trans("app.status.{$user->status}") }}--}}
-{{--        </span>--}}
-{{--    </td>--}}
+    <td class="align-middle">{{$item->khoahoc->khoahoc_name}}</td>
+    <td class="align-middle">
+        {!!  $item->baihoc_link_1 ? '<a target="_blank" href="'.$item->baihoc_link_1.'" >Link</a>' :__('N/A')!!}
+    </td>
+    <td class="align-middle">
+        {!!  $item->baihoc_link_2 ? '<a target="_blank" href="'.$item->baihoc_link_2.'" >Link</a>' :__('N/A')!!}
+    </td>
+    <td class="align-middle">
+        {!!  $item->baihoc_file ? '<a target="_blank" href="/upload/files/'.$item->baihoc_file.'" >Tải xuống</a>' :__('N/A')!!}
+    </td>
+{{--    <td class="align-middle">{{$item->baihoc_file ?: __('N/A')}}</td>--}}
+
     <td class="text-center align-middle">
 
         <a href="{{ route('baihoc.edit', $item) }}"

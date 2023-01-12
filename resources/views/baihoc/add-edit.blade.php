@@ -17,9 +17,9 @@
 @include('partials.messages')
 
 @if ($edit)
-    {!! Form::open(['route' => ['baihoc.update', $baihoc], 'method' => 'PUT', 'id' => 'baihoc-form']) !!}
+    {!! Form::open(['route' => ['baihoc.update', $baihoc], 'method' => 'PUT', 'id' => 'baihoc-form','enctype'=>'multipart/form-data']) !!}
 @else
-    {!! Form::open(['route' => 'baihoc.store', 'id' => 'baihoc-form']) !!}
+    {!! Form::open(['route' => 'baihoc.store', 'id' => 'baihoc-form','enctype'=>'multipart/form-data']) !!}
 @endif
 
 <div class="card">
@@ -54,8 +54,12 @@
                 <div class="form-group">
 
                     <label for="first_name">@lang('Tên khoá học')</label>
-                    {!! Form::select('khoahoc_id', $khoahoc, $edit ? $baihoc->khoahoc->id : '',
-                        ['class' => 'form-control input-solid', 'id' => 'khoahoc_id']) !!}
+                    @if (count($khoahoc))
+                        {!! Form::select('khoahoc_id', $khoahoc, $edit ? $baihoc->khoahoc->id : '',
+                            ['class' => 'form-control input-solid', 'id' => 'khoahoc_id']) !!}
+                    @else
+                        <code> Vui lòng tạo khoá học. <a href="{{route('khoahoc.create')}}">Click</a> </code>
+                    @endif
                 </div>
 
                 <div class="form-group">
@@ -92,9 +96,11 @@
     </div>
 </div>
 
-<button type="submit" class="btn btn-primary">
-    {{ __($edit ? 'Chỉnh sửa' : 'Thêm mới') }}
-</button>
+@if (count($khoahoc))
+    <button type="submit" class="btn btn-primary">
+        {{ __($edit ? 'Chỉnh sửa' : 'Thêm mới') }}
+    </button>
+@endif
 
 @stop
 

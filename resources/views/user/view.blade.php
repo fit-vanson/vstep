@@ -12,6 +12,8 @@
     </li>
 @stop
 
+
+
 @section('content')
 
 <div class="row">
@@ -81,10 +83,69 @@
         </div>
     </div>
 
-    @if (isset($activities))
-        <div class="col-lg-7 col-xl-8">
+    <div class="col-lg-7 col-xl-8">
+    <ul class="nav nav-pills mb-4 mt-2" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a href="#bai_hoc"
+               class="nav-link active"
+               id="pills-home-tab"
+               data-toggle="pill"
+               aria-controls="pills-home"
+               aria-selected="true">
+                <i class="fas fa-graduation-cap"></i>
+                @lang('Bài học')
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#latest_activity"
+               class="nav-link"
+               id="pills-home-tab"
+               data-toggle="pill"
+               aria-controls="pills-home"
+               aria-selected="true">
+                <i class="fas fa-chalkboard"></i>
+                @lang('Latest Activity')
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="bai_hoc">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive" id="baihoc-table-wrapper">
+                <table class="table table-borderless table-striped">
+                    <thead>
+                    <tr>
+                        {{--                        <th></th>--}}
+                        <th class="min-width-40">@lang('Tên bài học')</th>
+                        <th class="min-width-20">@lang('Khoá học')</th>
+                        <th class="min-width-20">@lang('Link 1')</th>
+                        <th class="min-width-20">@lang('Link 2')</th>
+                        <th class="min-width-20">@lang('File')</th>
+                        <th class="text-center min-width-10">@lang('Action')</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+{{--                    @if (count($baihoc))--}}
+                        @foreach ($user->baihoc as $item)
+                            @include('baihoc.partials.row')
+                        @endforeach
+{{--                    @else--}}
+{{--                        <tr>--}}
+{{--                            <td colspan="7"><em>@lang('No records found.')</em></td>--}}
+{{--                        </tr>--}}
+{{--                    @endif--}}
+                    </tbody>
+                </table>
+            </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="latest_activity">
             @include("user-activity::recent-activity", ['activities' => $activities])
         </div>
-    @endif
+    </div>
+    </div>
 </div>
 @stop

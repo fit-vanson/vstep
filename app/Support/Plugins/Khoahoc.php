@@ -11,7 +11,7 @@ class Khoahoc extends Plugin
     {
         return Item::create(__('Khoá học'))
             ->route('khoahoc.index')
-            ->icon('fas fa-folder')
+            ->icon('fas fa-book-open')
             ->active("khoahoc*")
             ->permissions('khoahoc.manage');
     }

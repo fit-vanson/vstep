@@ -1,20 +1,15 @@
 <tr>
 
     <td class="align-middle">
-{{--        <a href="{{ route('categories.show', $category) }}">--}}
-            {{ $item->khoahoc_name ?: __('N/A') }}
-{{--        </a>--}}
+        {{ $item->khoahoc_name ?: __('N/A') }}
     </td>
-    <td class="align-middle">{{count($item->baihoc)}}</td>
+    <td class="align-middle">
+        <a href="{{ route('baihoc.index',  ['khoahoc_id'=>$item->id]) }}">
+            {{count($item->baihoc)}}
+        </a>
+    </td>
     <td class="align-middle">{{ $item->category->cate_name }}</td>
-{{--    <td class="align-middle">{{ $user->created_at->format(config('app.date_format')) }}</td>--}}
-{{--    <td class="align-middle">--}}
-{{--        <span class="badge badge-lg badge-{{ $user->present()->labelClass }}">--}}
-{{--            {{ trans("app.status.{$user->status}") }}--}}
-{{--        </span>--}}
-{{--    </td>--}}
     <td class="text-center align-middle">
-
         <a href="{{ route('khoahoc.edit', $item) }}"
            class="btn btn-icon edit"
            title="@lang('Chỉnh sửa khoá học')"

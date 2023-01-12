@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('baihocs', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+            $table->uuid('khoahoc_id');
             $table->string('baihoc_name')->nullable()->index();
             $table->string('baihoc_link_1')->nullable();
             $table->string('baihoc_link_2')->nullable();

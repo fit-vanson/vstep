@@ -47,8 +47,12 @@
                 <div class="form-group">
 
                     <label for="first_name">@lang('Tên thể loại')</label>
+                    @if (count($categories))
                     {!! Form::select('cate_id', $categories, $edit ? $khoahoc->category->id : '',
                         ['class' => 'form-control input-solid', 'id' => 'cate_id']) !!}
+                    @else
+                       <code> Vui lòng tạo thể loại. <a href="{{route('categories.create')}}">Click</a> </code>
+                    @endif
                 </div>
 
                 <div class="form-group">
@@ -63,15 +67,15 @@
                            name="stt" placeholder="@lang('Số thứ tự')" value="{{ $edit ? $khoahoc->stt : '' }}">
                 </div>
 
-
             </div>
         </div>
     </div>
 </div>
-
-<button type="submit" class="btn btn-primary">
-    {{ __($edit ? 'Chỉnh sửa' : 'Thêm mới') }}
-</button>
+@if (count($categories))
+    <button type="submit" class="btn btn-primary">
+        {{ __($edit ? 'Chỉnh sửa' : 'Thêm mới') }}
+    </button>
+@endif
 
 @stop
 

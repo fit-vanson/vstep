@@ -22,6 +22,13 @@ class RolesSeeder extends Seeder
         ]);
 
         Role::create([
+            'name' => 'Manage',
+            'display_name' => 'Manage',
+            'description' => 'Default system manage.',
+            'removable' => false
+        ]);
+
+        Role::create([
             'name' => 'User',
             'display_name' => 'User',
             'description' => 'Default system user.',

@@ -30,6 +30,12 @@ interface CategoriesRepository
      * @return mixed
      */
     public function getAllWithUsersCount();
+    /**
+     * Get all system khoá học with number of category .
+     *
+     * @return mixed
+     */
+    public function getAllWithKhoahocCount();
 
     /**
      * Find system role by id.

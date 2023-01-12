@@ -13,8 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('baihocs', function (Blueprint $table) {
-            $table->integer('khoahoc_id')->default(1)->after('id');
+        Schema::create('user_has_baihocs', function (Blueprint $table) {
+            $table->id();
+            $table->integer('user_id')->index();
+            $table->uuid('baihoc_id')->index();;
+//            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('baihocs', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('user_has_baihocs');
     }
 };

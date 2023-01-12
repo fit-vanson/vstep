@@ -49,6 +49,15 @@ class EloquentCategories implements CategoriesRepository
     /**
      * {@inheritdoc}
      */
+    public function getAllWithKhoahocCount()
+    {
+
+        return Categories::with('khoahoc')->get();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function find($id)
     {
         return Categories::find($id);

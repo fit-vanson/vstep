@@ -66,6 +66,27 @@ class PermissionsSeeder extends Seeder
             'removable' => false
         ]);
 
+        $permissions[] = Permission::create([
+            'name' => 'categories.manage',
+            'display_name' => 'Quản lý Thể loại',
+            'description' => '',
+            'removable' => false
+        ]);
+
+        $permissions[] = Permission::create([
+            'name' => 'khoahoc.manage',
+            'display_name' => 'Quản lý Khoá học',
+            'description' => '',
+            'removable' => false
+        ]);
+
+        $permissions[] = Permission::create([
+            'name' => 'baihoc.manage',
+            'display_name' => 'Quản lý Bài học',
+            'description' => '',
+            'removable' => false
+        ]);
+
         $adminRole->attachPermissions($permissions);
     }
 }

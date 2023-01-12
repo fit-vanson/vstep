@@ -59,15 +59,17 @@
                 </div>
             </form>
 
-            <div class="table-responsive" id="users-table-wrapper">
+            <div class="table-responsive" id="baihoc-table-wrapper">
                 <table class="table table-borderless table-striped">
                     <thead>
                     <tr>
 {{--                        <th></th>--}}
-                        <th class="min-width-80">@lang('Tên bài học')</th>
-{{--                        <th class="min-width-20">@lang('Số bài học')</th>--}}
-                        <th class="min-width-80">@lang('Khoá học')</th>
-                        <th class="text-center min-width-150">@lang('Action')</th>
+                        <th class="min-width-40">@lang('Tên bài học')</th>
+                        <th class="min-width-20">@lang('Khoá học')</th>
+                        <th class="min-width-20">@lang('Link 1')</th>
+                        <th class="min-width-20">@lang('Link 2')</th>
+                        <th class="min-width-20">@lang('File')</th>
+                        <th class="text-center min-width-10">@lang('Action')</th>
                     </tr>
                     </thead>
                     <tbody>

@@ -78,12 +78,15 @@ class CategoriesController extends Controller
 
     public function destroy(Categories $category)
     {
-        $this->categories->delete($category->id);
-
-        Cache::flush();
-
-        return redirect()->route('categories.index')
-            ->withSuccess(__('Category deleted successfully.'));
+        if($category->khoahoc()->count() !=0){
+            return redirect()->route('categories.index')
+                ->withErrors(__('Không thể xoá thể loại.'));
+        }else{
+            $this->categories->delete($category->id);
+            Cache::flush();
+            return redirect()->route('categories.index')
+                ->withSuccess(__('Category deleted successfully.'));
+        }
     }
 
 }

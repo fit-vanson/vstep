@@ -101,6 +101,11 @@ class User extends Authenticatable implements TwoFactorAuthenticatableContract, 
         return $this->belongsTo(Country::class, 'country_id');
     }
 
+    public function baihoc()
+    {
+        return $this->belongsToMany(Baihoc::class, UserHasBaihoc::class, 'user_id', 'baihoc_id');
+    }
+
     /**
      * Send the password reset notification.
      *

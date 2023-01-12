@@ -2,9 +2,12 @@
 
 namespace Vanguard\Http\Controllers\Web;
 
+use Cache;
 use Illuminate\Http\Request;
+use Vanguard\Baihoc;
 use Vanguard\Http\Controllers\Controller;
 use Vanguard\Http\Requests\Baihoc\CreateBaihocRequest;
+use Vanguard\Http\Requests\Baihoc\UpdateBaihocRequest;
 use Vanguard\Repositories\Baihoc\BaihocRepository;
 use Vanguard\Repositories\Khoahoc\KhoahocRepository;
 
@@ -14,6 +17,8 @@ class BaihocController extends Controller
     {
         // Allow access to authenticated users only.
         $this->middleware('auth');
+//        $this->middleware('permission:baihoc.manage', ['only' => 'edit']);
+        $this->middleware('permission:baihoc.manage', ['only' => ['create','edit','destroy']]);
 
     }
     /**
@@ -23,9 +28,15 @@ class BaihocController extends Controller
      */
     public function index(Request $request,KhoahocRepository $khoahocRepository)
     {
-        $baihoc = $this->baihoc->paginate($perPage = 20, $request->search,$request->khoahoc_id);
-        $khoahocs = ['' => __('All')] + $khoahocRepository->lists()->toArray();
-        return view('baihoc.index', compact('baihoc','khoahocs'));
+        if(\Auth::user()->role->name ==='User'){
+
+            dd(1);
+        }else{
+            $baihoc = $this->baihoc->paginate($perPage = 20, $request->search,$request->khoahoc_id);
+            $khoahocs = ['' => __('All')] + $khoahocRepository->lists()->toArray();
+            return view('baihoc.index', compact('baihoc','khoahocs'));
+        }
+
     }
 
     /**
@@ -72,9 +83,14 @@ class BaihocController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Baihoc $baihoc,KhoahocRepository $khoahocRepository)
     {
-        //
+        return view('baihoc.add-edit', [
+            'baihoc' => $baihoc,
+            'khoahoc' => $khoahocRepository->lists(),
+            'statuses' => ['Hoạt động','Dừng'],
+            'edit' => true
+        ]);
     }
 
     /**
@@ -84,9 +100,11 @@ class BaihocController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Baihoc $baihoc, UpdateBaihocRequest $request)
     {
-        //
+        $this->baihoc->update($baihoc->id, $request->all());
+        return redirect()->route('baihoc.index')
+            ->withSuccess(__('Updated successfully.'));
     }
 
     /**
@@ -95,8 +113,12 @@ class BaihocController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Baihoc $baihoc)
     {
-        //
+        $this->baihoc->delete($baihoc->id);
+        Cache::flush();
+        return redirect()->route('baihoc.index')
+            ->withSuccess(__('Xoá thành công.'));
+
     }
 }

@@ -14,11 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('khoa_hocs', function (Blueprint $table) {
-            $table->id();
+//            $table->id();
+            $table->uuid('id')->primary();
             $table->string('khoahoc_name')->nullable()->index();
-            $table->integer('cate_id')->index();
+            $table->uuid('cate_id')->index();
             $table->integer('status')->default(1);
-            $table->integer('stt')->default(1);
+            $table->integer('stt')->nullable();
             $table->timestamps();
             $table->index('created_at');
         });

@@ -43,15 +43,12 @@ class KhoaHocController extends Controller
      */
     public function create(CategoriesRepository $categoryRepository)
     {
-
-
         return view('khoahoc.add-edit', [
             'categories' => $categoryRepository->lists(),
             'statuses' => ['Hoạt động','Dừng'],
             'edit' => false
 
         ]);
-//        return view('khoahoc.add-edit', ['edit' => false]);
     }
 
     /**
@@ -114,8 +111,16 @@ class KhoaHocController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(KhoaHoc $khoahoc)
     {
-        //
+        if($khoahoc->baihoc()->count() !=0){
+            return redirect()->route('khoahoc.index')
+                ->withErrors(__('Không thể xoá khoá học.'));
+        }else{
+            $this->khoahoc->delete($khoahoc->id);
+            Cache::flush();
+            return redirect()->route('khoahoc.index')
+                ->withSuccess(__('Xoá thành công.'));
+        }
     }
 }

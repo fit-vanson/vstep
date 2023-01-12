@@ -1,5 +1,22 @@
 <?php
 
+
+/**
+ * clear
+ */
+
+Route::get('/clear',function (){
+    try {
+        echo  Artisan::call('optimize:clear');
+        echo  Artisan::call('cache:clear');
+        echo  Artisan::call('config:cache');
+        echo  Artisan::call('route:cache');
+    }catch (\Exception $exception){
+        \Illuminate\Support\Facades\Log::error('clear ' .$exception->getMessage());
+    }
+
+});
+
 /**
  * Authentication
  */
@@ -144,9 +161,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     Route::resource('categories', 'CategoriesController')
         ->except('show')->middleware('permission:categories.manage');
-//    Route::group(['prefix' => 'categories/{categories}', 'middleware' => 'permission:categories.manage'], function () {
-//    });
-
     /**
      * Khoc hoc
      */
@@ -159,9 +173,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
      */
 
     Route::resource('baihoc', 'BaihocController')
-        ->except('show')->middleware('permission:baihoc.manage');
-
-
+//        ->except('show')->middleware('permission:baihoc.manage');
+        ->except('show');
 
     /**
      * Settings
