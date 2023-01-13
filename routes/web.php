@@ -56,176 +56,178 @@ Route::group(['middleware' => 'auth'], function () {
     Route::impersonate();
 });
 
-Route::group(['middleware' => ['auth', 'verified']], function () {
 
-    /**
-     * Dashboard
-     */
+Route::group(['prefix' => 'admin'], function () {
+    Route::group(['middleware' => ['auth', 'verified']], function () {
 
-    Route::get('/', 'DashboardController@index')->name('dashboard');
+        /**
+         * Dashboard
+         */
 
-    /**
-     * User Profile
-     */
+        Route::get('/', 'DashboardController@index')->name('dashboard');
 
-    Route::group(['prefix' => 'profile', 'namespace' => 'Profile'], function () {
-        Route::get('/', 'ProfileController@show')->name('profile');
-        Route::get('activity', 'ActivityController@show')->name('profile.activity');
-        Route::put('details', 'DetailsController@update')->name('profile.update.details');
+        /**
+         * User Profile
+         */
 
-        Route::post('avatar', 'AvatarController@update')->name('profile.update.avatar');
-        Route::post('avatar/external', 'AvatarController@updateExternal')
-            ->name('profile.update.avatar-external');
+        Route::group(['prefix' => 'profile', 'namespace' => 'Profile'], function () {
+            Route::get('/', 'ProfileController@show')->name('profile');
+            Route::get('activity', 'ActivityController@show')->name('profile.activity');
+            Route::put('details', 'DetailsController@update')->name('profile.update.details');
 
-        Route::put('login-details', 'LoginDetailsController@update')
-            ->name('profile.update.login-details');
+            Route::post('avatar', 'AvatarController@update')->name('profile.update.avatar');
+            Route::post('avatar/external', 'AvatarController@updateExternal')
+                ->name('profile.update.avatar-external');
 
-        Route::get('sessions', 'SessionsController@index')
-            ->name('profile.sessions')
-            ->middleware('session.database');
+            Route::put('login-details', 'LoginDetailsController@update')
+                ->name('profile.update.login-details');
 
-        Route::delete('sessions/{session}/invalidate', 'SessionsController@destroy')
-            ->name('profile.sessions.invalidate')
-            ->middleware('session.database');
-    });
+            Route::get('sessions', 'SessionsController@index')
+                ->name('profile.sessions')
+                ->middleware('session.database');
 
-
-    /**
-     * Two-Factor Authentication Setup
-     */
-
-    Route::group(['middleware' => 'two-factor'], function () {
-        Route::post('two-factor/enable', 'TwoFactorController@enable')->name('two-factor.enable');
-
-        Route::get('two-factor/verification', 'TwoFactorController@verification')
-            ->name('two-factor.verification')
-            ->middleware('verify-2fa-phone');
-
-        Route::post('two-factor/resend', 'TwoFactorController@resend')
-            ->name('two-factor.resend')
-            ->middleware('throttle:1,1', 'verify-2fa-phone');
-
-        Route::post('two-factor/verify', 'TwoFactorController@verify')
-            ->name('two-factor.verify')
-            ->middleware('verify-2fa-phone');
-
-        Route::post('two-factor/disable', 'TwoFactorController@disable')->name('two-factor.disable');
-    });
+            Route::delete('sessions/{session}/invalidate', 'SessionsController@destroy')
+                ->name('profile.sessions.invalidate')
+                ->middleware('session.database');
+        });
 
 
-    /**
-     * User Management
-     */
-    Route::resource('users', 'Users\UsersController')
-        ->except('update')->middleware('permission:users.manage');
+        /**
+         * Two-Factor Authentication Setup
+         */
 
-    Route::group(['prefix' => 'users/{user}', 'middleware' => 'permission:users.manage'], function () {
-        Route::put('update/details', 'Users\DetailsController@update')->name('users.update.details');
-        Route::put('update/baihoc', 'Users\DetailsController@updateBaihoc')->name('users.update.baihoc');
-        Route::put('update/login-details', 'Users\LoginDetailsController@update')
-            ->name('users.update.login-details');
+        Route::group(['middleware' => 'two-factor'], function () {
+            Route::post('two-factor/enable', 'TwoFactorController@enable')->name('two-factor.enable');
 
-        Route::post('update/avatar', 'Users\AvatarController@update')->name('user.update.avatar');
-        Route::post('update/avatar/external', 'Users\AvatarController@updateExternal')
-            ->name('user.update.avatar.external');
+            Route::get('two-factor/verification', 'TwoFactorController@verification')
+                ->name('two-factor.verification')
+                ->middleware('verify-2fa-phone');
 
-        Route::get('sessions', 'Users\SessionsController@index')
-            ->name('user.sessions')->middleware('session.database');
+            Route::post('two-factor/resend', 'TwoFactorController@resend')
+                ->name('two-factor.resend')
+                ->middleware('throttle:1,1', 'verify-2fa-phone');
 
-        Route::delete('sessions/{session}/invalidate', 'Users\SessionsController@destroy')
-            ->name('user.sessions.invalidate')->middleware('session.database');
+            Route::post('two-factor/verify', 'TwoFactorController@verify')
+                ->name('two-factor.verify')
+                ->middleware('verify-2fa-phone');
 
-        Route::post('two-factor/enable', 'TwoFactorController@enable')->name('user.two-factor.enable');
-        Route::post('two-factor/disable', 'TwoFactorController@disable')->name('user.two-factor.disable');
-    });
+            Route::post('two-factor/disable', 'TwoFactorController@disable')->name('two-factor.disable');
+        });
 
-    /**
-     * Roles & Permissions
-     */
-    Route::group(['namespace' => 'Authorization'], function () {
-        Route::resource('roles', 'RolesController')->except('show')->middleware('permission:roles.manage');
 
-        Route::post('permissions/save', 'RolePermissionsController@update')
-            ->name('permissions.save')
-            ->middleware('permission:permissions.manage');
+        /**
+         * User Management
+         */
+        Route::resource('users', 'Users\UsersController')
+            ->except('update')->middleware('permission:users.manage');
 
-        Route::resource('permissions', 'PermissionsController')->middleware('permission:permissions.manage');
-    });
+        Route::group(['prefix' => 'users/{user}', 'middleware' => 'permission:users.manage'], function () {
+            Route::put('update/details', 'Users\DetailsController@update')->name('users.update.details');
+            Route::put('update/baihoc', 'Users\DetailsController@updateBaihoc')->name('users.update.baihoc');
+            Route::put('update/login-details', 'Users\LoginDetailsController@update')
+                ->name('users.update.login-details');
 
-    /**
-     * Categories
-     */
+            Route::post('update/avatar', 'Users\AvatarController@update')->name('user.update.avatar');
+            Route::post('update/avatar/external', 'Users\AvatarController@updateExternal')
+                ->name('user.update.avatar.external');
 
-    Route::resource('categories', 'CategoriesController')
-        ->except('show')->middleware('permission:categories.manage');
-    /**
-     * Khoc hoc
-     */
+            Route::get('sessions', 'Users\SessionsController@index')
+                ->name('user.sessions')->middleware('session.database');
 
-    Route::resource('khoahoc', 'KhoaHocController')
-        ->except('show')->middleware('permission:khoahoc.manage');
+            Route::delete('sessions/{session}/invalidate', 'Users\SessionsController@destroy')
+                ->name('user.sessions.invalidate')->middleware('session.database');
 
-    /**
-     * Bai hoc
-     */
+            Route::post('two-factor/enable', 'TwoFactorController@enable')->name('user.two-factor.enable');
+            Route::post('two-factor/disable', 'TwoFactorController@disable')->name('user.two-factor.disable');
+        });
 
-    Route::resource('baihoc', 'BaihocController')
+        /**
+         * Roles & Permissions
+         */
+        Route::group(['namespace' => 'Authorization'], function () {
+            Route::resource('roles', 'RolesController')->except('show')->middleware('permission:roles.manage');
+
+            Route::post('permissions/save', 'RolePermissionsController@update')
+                ->name('permissions.save')
+                ->middleware('permission:permissions.manage');
+
+            Route::resource('permissions', 'PermissionsController')->middleware('permission:permissions.manage');
+        });
+
+        /**
+         * Categories
+         */
+
+        Route::resource('categories', 'CategoriesController')
+            ->except('show')->middleware('permission:categories.manage');
+        /**
+         * Khoc hoc
+         */
+
+        Route::resource('khoahoc', 'KhoaHocController')
+            ->except('show')->middleware('permission:khoahoc.manage');
+
+        /**
+         * Bai hoc
+         */
+
+        Route::resource('baihoc', 'BaihocController')
 //        ->except('show')->middleware('permission:baihoc.manage');
-        ->except('show');
+            ->except('show');
 
-    /**
-     * Settings
-     */
+        /**
+         * Settings
+         */
 
-    Route::get('settings', 'SettingsController@general')->name('settings.general')
-        ->middleware('permission:settings.general');
+        Route::get('settings', 'SettingsController@general')->name('settings.general')
+            ->middleware('permission:settings.general');
 
-    Route::post('settings/general', 'SettingsController@update')->name('settings.general.update')
-        ->middleware('permission:settings.general');
+        Route::post('settings/general', 'SettingsController@update')->name('settings.general.update')
+            ->middleware('permission:settings.general');
 
-    Route::get('settings/auth', 'SettingsController@auth')->name('settings.auth')
-        ->middleware('permission:settings.auth');
-
-    Route::post('settings/auth', 'SettingsController@update')->name('settings.auth.update')
-        ->middleware('permission:settings.auth');
-
-    if (config('services.authy.key')) {
-        Route::post('settings/auth/2fa/enable', 'SettingsController@enableTwoFactor')
-            ->name('settings.auth.2fa.enable')
+        Route::get('settings/auth', 'SettingsController@auth')->name('settings.auth')
             ->middleware('permission:settings.auth');
 
-        Route::post('settings/auth/2fa/disable', 'SettingsController@disableTwoFactor')
-            ->name('settings.auth.2fa.disable')
+        Route::post('settings/auth', 'SettingsController@update')->name('settings.auth.update')
             ->middleware('permission:settings.auth');
-    }
 
-    Route::post('settings/auth/registration/captcha/enable', 'SettingsController@enableCaptcha')
-        ->name('settings.registration.captcha.enable')
-        ->middleware('permission:settings.auth');
+        if (config('services.authy.key')) {
+            Route::post('settings/auth/2fa/enable', 'SettingsController@enableTwoFactor')
+                ->name('settings.auth.2fa.enable')
+                ->middleware('permission:settings.auth');
 
-    Route::post('settings/auth/registration/captcha/disable', 'SettingsController@disableCaptcha')
-        ->name('settings.registration.captcha.disable')
-        ->middleware('permission:settings.auth');
+            Route::post('settings/auth/2fa/disable', 'SettingsController@disableTwoFactor')
+                ->name('settings.auth.2fa.disable')
+                ->middleware('permission:settings.auth');
+        }
 
-    Route::get('settings/notifications', 'SettingsController@notifications')
-        ->name('settings.notifications')
-        ->middleware('permission:settings.notifications');
+        Route::post('settings/auth/registration/captcha/enable', 'SettingsController@enableCaptcha')
+            ->name('settings.registration.captcha.enable')
+            ->middleware('permission:settings.auth');
 
-    Route::post('settings/notifications', 'SettingsController@update')
-        ->name('settings.notifications.update')
-        ->middleware('permission:settings.notifications');
+        Route::post('settings/auth/registration/captcha/disable', 'SettingsController@disableCaptcha')
+            ->name('settings.registration.captcha.disable')
+            ->middleware('permission:settings.auth');
 
-    /**
-     * Activity Log
-     */
+        Route::get('settings/notifications', 'SettingsController@notifications')
+            ->name('settings.notifications')
+            ->middleware('permission:settings.notifications');
 
-    Route::get('activity', 'ActivityController@index')->name('activity.index')
-        ->middleware('permission:users.activity');
+        Route::post('settings/notifications', 'SettingsController@update')
+            ->name('settings.notifications.update')
+            ->middleware('permission:settings.notifications');
 
-    Route::get('activity/user/{user}/log', 'Users\ActivityController@index')->name('activity.user')
-        ->middleware('permission:users.activity');
+        /**
+         * Activity Log
+         */
+
+        Route::get('activity', 'ActivityController@index')->name('activity.index')
+            ->middleware('permission:users.activity');
+
+        Route::get('activity/user/{user}/log', 'Users\ActivityController@index')->name('activity.user')
+            ->middleware('permission:users.activity');
+    });
 });
-
 
 /**
  * Installation
