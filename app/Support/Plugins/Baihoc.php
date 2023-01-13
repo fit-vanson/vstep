@@ -12,7 +12,7 @@ class Baihoc extends Plugin
         return Item::create(__('Bài học'))
             ->route('baihoc.index')
             ->icon('fas fa-book')
-            ->active("baihoc*")
-            ->permissions('baihoc.manage');
+            ->active("baihoc*");
+//            ->permissions('baihoc.manage',['only' => ['create', 'edit', 'destroy']]);
     }
 }

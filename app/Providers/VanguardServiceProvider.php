@@ -10,6 +10,7 @@ use Vanguard\Support\Plugins\Dashboard\Widgets\RegistrationHistory;
 use Vanguard\Support\Plugins\Dashboard\Widgets\TotalUsers;
 use Vanguard\Support\Plugins\Dashboard\Widgets\UnconfirmedUsers;
 use Vanguard\Support\Plugins\Dashboard\Widgets\UserActions;
+use Vanguard\Support\Plugins\Dashboard\Widgets\BaihocUser;
 use Vanguard\UserActivity\Widgets\ActivityWidget;
 
 class VanguardServiceProvider extends BaseVanguardServiceProvider
@@ -49,7 +50,8 @@ class VanguardServiceProvider extends BaseVanguardServiceProvider
             UnconfirmedUsers::class,
             RegistrationHistory::class,
             LatestRegistrations::class,
-            ActivityWidget::class,
+//            ActivityWidget::class,
+//            BaihocUser::class,
         ];
     }
 }

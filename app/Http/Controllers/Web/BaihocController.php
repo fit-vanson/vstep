@@ -17,8 +17,9 @@ class BaihocController extends Controller
     {
         // Allow access to authenticated users only.
         $this->middleware('auth');
-//        $this->middleware('permission:baihoc.manage', ['only' => 'edit']);
+//        $this->middleware('permission:baihoc.manage');
         $this->middleware('permission:baihoc.manage', ['only' => ['create', 'edit', 'destroy']]);
+
 
     }
 
@@ -29,15 +30,23 @@ class BaihocController extends Controller
      */
     public function index(Request $request, KhoahocRepository $khoahocRepository)
     {
-        if (\Auth::user()->role->name === 'User') {
+        $khoahocs = [];
+        if (\Auth::user()->hasRole('User')) {
+//            dd()
+            if($request->search){
+                $search = $request->search;
+                $baihoc = collect(\Auth::user()->baihoc)->filter(function ($item) use ($search) {
+                    return false !== stristr($item->baihoc_name, $search);
+                });
+            }else{
+                $baihoc = \Auth::user()->baihoc->all();
+            }
 
-            dd(1);
         } else {
             $baihoc = $this->baihoc->paginate($perPage = 20, $request->search, $request->khoahoc_id);
             $khoahocs = ['' => __('All')] + $khoahocRepository->lists()->toArray();
-            return view('baihoc.index', compact('baihoc', 'khoahocs'));
         }
-
+        return view('baihoc.index', compact('baihoc', 'khoahocs'));
     }
 
     /**

@@ -105,7 +105,7 @@
                     </a>
                 </li>
 
-                @if($user->role->name ==='User')
+                @if($user->hasRole('User'))
                     <li class="nav-item">
                         <a href="#bai_hoc"
                            class="nav-link "

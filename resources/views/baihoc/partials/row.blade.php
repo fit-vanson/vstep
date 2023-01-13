@@ -15,8 +15,8 @@
     </td>
     {{--    <td class="align-middle">{{$item->baihoc_file ?: __('N/A')}}</td>--}}
 
+    @permission('baihoc.manage')
     <td class="text-center align-middle">
-
         <a href="{{ route('baihoc.edit', $item) }}"
            class="btn btn-icon edit"
            title="@lang('Chỉnh sửa bài học')"
@@ -36,4 +36,5 @@
             <i class="fas fa-trash"></i>
         </a>
     </td>
+    @endpermission
 </tr>

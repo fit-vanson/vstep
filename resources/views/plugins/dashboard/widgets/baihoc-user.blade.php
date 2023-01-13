@@ -1,19 +1,4 @@
-@extends('layouts.app')
-
-@section('page-title', __('Bài học'))
-@section('page-heading', __('Bài học'))
-
-@section('breadcrumbs')
-    <li class="breadcrumb-item active">
-        @lang('Bài học')
-    </li>
-@stop
-
-@section('content')
-
-    @include('partials.messages')
-
-
+<div class="col-md-12">
     <div class="card">
         <div class="card-body">
             <form action="" method="GET" id="baihoc-form" class="pb-2 mb-3 border-bottom-light">
@@ -40,7 +25,6 @@
                             </span>
                         </div>
                     </div>
-                    @permission('baihoc.manage')
                     <div class="col-md-2 mt-2 mt-md-0">
                         @if(isset($khoahocs))
                             {!!
@@ -59,7 +43,6 @@
                             @lang('Thêm bài học')
                         </a>
                     </div>
-                    @endpermission
                 </div>
             </form>
 
@@ -72,33 +55,25 @@
                         <th class="min-width-20">@lang('Link 1')</th>
                         <th class="min-width-20">@lang('Link 2')</th>
                         <th class="min-width-20">@lang('File')</th>
-                        @permission('baihoc.manage')
                         <th class="text-center min-width-10">@lang('Action')</th>
-                        @endpermission
                     </tr>
                     </thead>
                     <tbody>
-                    @if (count($baihoc))
-                        @foreach ($baihoc as $item)
-                            @include('baihoc.partials.row')
-                        @endforeach
-                    @else
-                        <tr>
-                            <td colspan="7"><em>@lang('No records found.')</em></td>
-                        </tr>
-                    @endif
+{{--                    @if (count($baihoc))--}}
+{{--                        @foreach ($baihoc as $item)--}}
+{{--                            @include('baihoc.partials.row')--}}
+{{--                        @endforeach--}}
+{{--                    @else--}}
+{{--                        <tr>--}}
+{{--                            <td colspan="7"><em>@lang('No records found.')</em></td>--}}
+{{--                        </tr>--}}
+{{--                    @endif--}}
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-{{--    {!! $baihoc->render() !!}--}}
-@stop
-@section('scripts')
-    <script>
-        $("#khoahoc_id").change(function () {
-            $("#baihoc-form").submit();
-        });
-    </script>
-@stop
+    {!! $baihoc->render() !!}
+</div>
+
