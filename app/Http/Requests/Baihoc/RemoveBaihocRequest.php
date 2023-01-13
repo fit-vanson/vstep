@@ -1,10 +1,10 @@
 <?php
 
-namespace Vanguard\Http\Requests\Baihoc;
+namespace Vanguard\Http\Requests\Categories;
 
 use Vanguard\Http\Requests\Request;
 
-class RemoveBaihocRequest extends Request
+class RemoveKhoahocRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
