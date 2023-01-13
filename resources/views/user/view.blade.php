@@ -24,15 +24,17 @@
                     @lang('Details')
 
                     <small>
-                        @canBeImpersonated($user)
-                        <a href="{{ route('impersonate', $user) }}"
-                           data-toggle="tooltip"
-                           data-placement="top"
-                           title="@lang('Impersonate User')">
-                            @lang('Impersonate')
-                        </a>
-                        <span class="text-muted">|</span>
-                        @endCanBeImpersonated
+                        @role('Admin')
+                            @canBeImpersonated($user)
+                            <a href="{{ route('impersonate', $user) }}"
+                               data-toggle="tooltip"
+                               data-placement="top"
+                               title="@lang('Impersonate User')">
+                                @lang('Impersonate')
+                            </a>
+                            <span class="text-muted">|</span>
+                            @endCanBeImpersonated
+                        @endrole
 
                         <a href="{{ route('users.edit', $user) }}"
                            class="edit"
@@ -121,44 +123,41 @@
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane" id="bai_hoc">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="{{ route('users.update.baihoc', $user) }}" method="POST" id="baihoc-form">
+                                @csrf
+                                @method('PUT')
+                                <div class="table-responsive" id="baihoc-table-wrapper">
+                                    <table class="table table-borderless table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th class="min-width-40">@lang('Tên bài học')</th>
+                                            <th class="min-width-20">@lang('Khoá học')</th>
+                                            <th class="min-width-20">@lang('Link 1')</th>
+                                            <th class="min-width-20">@lang('Link 2')</th>
+                                            <th class="min-width-20">@lang('File')</th>
+                                            <th class="text-center min-width-10">@lang('Action')</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
 
-                        <div class="card">
-                            <div class="card-body">
-                                <form action="{{ route('users.update.baihoc', $user) }}" method="POST" id="baihoc-form">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="table-responsive" id="baihoc-table-wrapper">
-                                        <table class="table table-borderless table-striped">
-                                            <thead>
-                                            <tr>
-                                                <th class="min-width-40">@lang('Tên bài học')</th>
-                                                <th class="min-width-20">@lang('Khoá học')</th>
-                                                <th class="min-width-20">@lang('Link 1')</th>
-                                                <th class="min-width-20">@lang('Link 2')</th>
-                                                <th class="min-width-20">@lang('File')</th>
-                                                <th class="text-center min-width-10">@lang('Action')</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
+                                        @foreach ($baihoc as $item)
+                                            @include('user.partials.baihoc')
+                                        @endforeach
 
-                                            @foreach ($baihoc as $item)
-                                                @include('user.partials.baihoc')
-                                            @endforeach
-
-                                            </tbody>
-                                        </table>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <button type="submit" class="btn btn-primary"
+                                                id="upssssdate-details-btn">@lang('Save')</button>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <button type="submit" class="btn btn-primary"
-                                                    id="upssssdate-details-btn">@lang('Save')</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
-
-
+                    </div>
                 </div>
                 <div role="tabpanel" class="tab-pane active" id="latest_activity">
                     @include("user-activity::recent-activity", ['activities' => $activities])

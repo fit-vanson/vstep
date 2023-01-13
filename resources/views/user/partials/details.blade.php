@@ -1,15 +1,16 @@
 <div class="row">
     <div class="col-md-6">
-        <div class="form-group">
-            <label for="first_name">@lang('Role')</label>
-            {!! Form::select('role_id', $roles, $edit ? $user->role->id : '',
-                ['class' => 'form-control input-solid', 'id' => 'role_id', $profile ? 'disabled' : '']) !!}
-        </div>
-        <div class="form-group">
-            <label for="status">@lang('Status')</label>
-            {!! Form::select('status', $statuses, $edit ? $user->status : '',
-                ['class' => 'form-control input-solid', 'id' => 'status', $profile ? 'disabled' : '']) !!}
-        </div>
+            <div class="form-group">
+                <label for="first_name">@lang('Role')</label>
+                {!! Form::select('role_id', $roles, $edit ? $user->role->id : '',
+                    ['class' => 'form-control input-solid', 'id' => 'role_id', \Auth::user()->hasRole('Admin') ? ($profile ? 'disabled' : ''):'disabled']) !!}
+            </div>
+            <div class="form-group">
+                <label for="status">@lang('Status')</label>
+                {!! Form::select('status', $statuses, $edit ? $user->status : '',
+                    ['class' => 'form-control input-solid', 'id' => 'status', $profile ? 'disabled' : '']) !!}
+            </div>
+{{--        @endif--}}
         <div class="form-group">
             <label for="first_name">@lang('First Name')</label>
             <input type="text" class="form-control input-solid" id="first_name"
