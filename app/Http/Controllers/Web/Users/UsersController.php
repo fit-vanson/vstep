@@ -144,7 +144,6 @@ class UsersController extends Controller
             return redirect()->route('users.index')
                 ->withErrors(__('You cannot delete yourself.'));
         }
-
         $this->users->delete($user->id);
 
         event(new Deleted($user));
