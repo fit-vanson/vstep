@@ -4,6 +4,7 @@ namespace Vanguard\Providers;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Vanguard\Repositories\Baihoc\BaihocRepository;
 use Vanguard\Repositories\Baihoc\EloquentBaihoc;
@@ -40,6 +41,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         \Illuminate\Pagination\Paginator::useBootstrap();
+        URL::forceScheme('https');
     }
 
     /**
