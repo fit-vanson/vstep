@@ -182,7 +182,7 @@ class InstallController extends Controller
     {
         return [
             'public/upload/users' => is_writable(public_path('upload/users')),
-            'public/upload/files' => is_writable(public_path('upload/files')),
+//            'public/upload/files' => is_writable(public_path('upload/files')),
             'storage/app' => is_writable(storage_path('app')),
             'storage/framework/cache' => is_writable(storage_path('framework/cache')),
             'storage/framework/sessions' => is_writable(storage_path('framework/sessions')),
