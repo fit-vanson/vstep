@@ -68,6 +68,12 @@
                             </li>
                         @endif
                         <li class="list-group-item">
+                            <strong>@lang('Role'):</strong>
+                            <span class="badge badge-lg badge-{{ $user->present()->labelRoleClass }}">
+                                {{ $user->present()->role->name }}
+                            </span>
+                        </li>
+                            <li class="list-group-item">
                             <strong>@lang('Birthday'):</strong>
                             {{ $user->present()->birthday }}
                         </li>

@@ -41,7 +41,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         \Illuminate\Pagination\Paginator::useBootstrap();
-        URL::forceScheme('https');
+//        URL::forceScheme('https');
     }
 
     /**

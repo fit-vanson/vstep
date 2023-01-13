@@ -81,4 +81,29 @@ class UserPresenter extends Presenter
 
         return $class;
     }
+
+    /**
+     * Determine css class used for status labels
+     * inside the users table by checking user status.
+     *
+     * @return string
+     */
+    public function labelRoleClass()
+    {
+        switch ($this->model->role_id) {
+            case 1:
+                $class = 'dark';
+                break;
+
+            case 2:
+                $class = 'danger';
+                break;
+
+            default:
+                $class = 'warning';
+        }
+
+        return $class;
+    }
+
 }
