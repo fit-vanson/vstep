@@ -33,7 +33,7 @@ class CountriesSeeder extends Seeder
                 'eea' => (bool)$country['eea'],
                 'calling_code' => $country['calling_code'],
                 'currency_symbol' => ((isset($country['currency_symbol'])) ? $country['currency_symbol'] : null),
-                'flag' =>((isset($country['flag'])) ? $country['flag'] : null),
+                'flag' => ((isset($country['flag'])) ? $country['flag'] : null),
             ));
         }
     }

@@ -15,12 +15,12 @@ class SendSignUpNotification
     /**
      * Handle the event.
      *
-     * @param  Registered  $event
+     * @param Registered $event
      * @return void
      */
     public function handle(Registered $event)
     {
-        if (! setting('notifications_signup_email')) {
+        if (!setting('notifications_signup_email')) {
             return;
         }
 

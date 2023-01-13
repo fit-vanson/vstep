@@ -14,7 +14,7 @@ abstract class BaihocEvent
 
     public function __construct(Baihoc $baihoc)
     {
-        $this->baihoc= $baihoc;
+        $this->baihoc = $baihoc;
     }
 
 //    /**

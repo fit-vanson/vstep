@@ -98,7 +98,7 @@ class PermissionsController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        if (! $permission->removable) {
+        if (!$permission->removable) {
             throw new NotFoundHttpException;
         }
 

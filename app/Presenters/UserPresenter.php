@@ -2,8 +2,8 @@
 
 namespace Vanguard\Presenters;
 
-use Vanguard\Support\Enum\UserStatus;
 use Illuminate\Support\Str;
+use Vanguard\Support\Enum\UserStatus;
 
 class UserPresenter extends Presenter
 {
@@ -19,7 +19,7 @@ class UserPresenter extends Presenter
 
     public function avatar()
     {
-        if (! $this->model->avatar) {
+        if (!$this->model->avatar) {
             return url('assets/img/profile.png');
         }
 

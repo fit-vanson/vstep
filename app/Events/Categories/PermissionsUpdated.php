@@ -2,4 +2,6 @@
 
 namespace Vanguard\Events\Categories;
 
-class PermissionsUpdated {}
+class PermissionsUpdated
+{
+}

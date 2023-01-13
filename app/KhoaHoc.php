@@ -9,8 +9,9 @@ use Illuminate\Support\Str;
 class KhoaHoc extends Model
 {
     use HasFactory;
-    protected $keyType =  'string';
-    protected $fillable = ['khoahoc_name','cate_id','status','stt'];
+
+    protected $keyType = 'string';
+    protected $fillable = ['khoahoc_name', 'cate_id', 'status', 'stt'];
     protected $casts = [
         'id' => 'string',
     ];
@@ -25,10 +26,11 @@ class KhoaHoc extends Model
     {
         return $this->hasMany(Baihoc::class, 'khoahoc_id');
     }
+
     protected static function boot()
     {
         parent::boot();
-        static::creating(function ($obj){
+        static::creating(function ($obj) {
             $obj->id = Str::uuid();
         });
     }

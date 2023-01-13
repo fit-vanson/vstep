@@ -2,8 +2,8 @@
 
 namespace Vanguard\Http\Controllers\Web;
 
-use Illuminate\Http\Request;
 use Cache;
+use Illuminate\Http\Request;
 use Vanguard\Categories;
 use Vanguard\Http\Controllers\Controller;
 use Vanguard\Http\Requests\Categories\CreateCategoryRequest;
@@ -26,6 +26,7 @@ class CategoriesController extends Controller
         $categories = $this->categories->paginate($perPage = 20, $request->search);
         return view('categories.index', compact('categories'));
     }
+
     public function create()
     {
         return view('categories.add-edit', ['edit' => false]);
@@ -72,16 +73,15 @@ class CategoriesController extends Controller
      * Remove specified role from system.
      *
      * @param Categories $category
-
      * @return mixed
      */
 
     public function destroy(Categories $category)
     {
-        if($category->khoahoc()->count() !=0){
+        if ($category->khoahoc()->count() != 0) {
             return redirect()->route('categories.index')
                 ->withErrors(__('Không thể xoá thể loại.'));
-        }else{
+        } else {
             $this->categories->delete($category->id);
             Cache::flush();
             return redirect()->route('categories.index')

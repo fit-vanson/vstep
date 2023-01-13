@@ -2,4 +2,6 @@
 
 namespace Vanguard\Events\Khoahoc;
 
-class Deleted extends KhoahocEvent {}
+class Deleted extends KhoahocEvent
+{
+}

@@ -5,13 +5,13 @@ namespace Vanguard\Providers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Vanguard\Events\User\Banned;
 use Vanguard\Events\User\LoggedIn;
-use Vanguard\Listeners\Users\ActivateUser;
-use Vanguard\Listeners\Users\InvalidateSessions;
 use Vanguard\Listeners\Login\UpdateLastLoginTimestamp;
 use Vanguard\Listeners\Registration\SendSignUpNotification;
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Vanguard\Listeners\Users\ActivateUser;
+use Vanguard\Listeners\Users\InvalidateSessions;
 
 class EventServiceProvider extends ServiceProvider
 {

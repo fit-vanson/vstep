@@ -26,13 +26,13 @@
 
 @section('content')
 
-@include('partials.messages')
+    @include('partials.messages')
 
-<div class="card">
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-borderless table-striped">
-                <thead>
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-borderless table-striped">
+                    <thead>
                     <tr>
                         <th>@lang('IP Address')</th>
                         <th>@lang('Device')</th>
@@ -40,8 +40,8 @@
                         <th>@lang('Last Activity')</th>
                         <th class="text-center">@lang('Action')</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     @if (count($sessions))
                         @foreach ($sessions as $session)
                             <tr>
@@ -71,10 +71,10 @@
                             <td colspan="6"><em>@lang('No records found.')</em></td>
                         </tr>
                     @endif
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
 @stop

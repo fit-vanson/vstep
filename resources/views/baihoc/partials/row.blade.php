@@ -13,7 +13,7 @@
     <td class="align-middle">
         {!!  $item->baihoc_file ? '<a target="_blank" href="/upload/files/'.$item->baihoc_file.'" >Tải xuống</a>' :__('N/A')!!}
     </td>
-{{--    <td class="align-middle">{{$item->baihoc_file ?: __('N/A')}}</td>--}}
+    {{--    <td class="align-middle">{{$item->baihoc_file ?: __('N/A')}}</td>--}}
 
     <td class="text-center align-middle">
 

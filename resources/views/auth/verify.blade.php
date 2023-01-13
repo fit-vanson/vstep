@@ -20,7 +20,8 @@
                             @csrf
                             <button type="submit" class="d-inline btn btn-link p-0">
                                 {{ __('click here to request another') }}
-                            </button>.
+                            </button>
+                            .
                         </form>
                     </div>
                 </div>

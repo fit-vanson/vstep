@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Collection;
-use Illuminate\Testing\TestResponse;
 use Tests\TestCase;
 use Tests\UpdatesSettings;
 use Vanguard\User;

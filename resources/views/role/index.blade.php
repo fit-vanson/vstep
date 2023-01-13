@@ -37,37 +37,37 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @if (count($roles))
-                            @foreach ($roles as $role)
-                                <tr>
-                                    <td>{{ $role->name }}</td>
-                                    <td>{{ $role->display_name }}</td>
-                                    <td>{{ $role->users_count }}</td>
-                                    <td class="text-center">
-                                        <a href="{{ route('roles.edit', $role) }}" class="btn btn-icon"
-                                           title="@lang('Edit Role')" data-toggle="tooltip" data-placement="top">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        @if ($role->removable)
-                                            <a href="{{ route('roles.destroy', $role) }}" class="btn btn-icon"
-                                               title="@lang('Delete Role')"
-                                               data-toggle="tooltip"
-                                               data-placement="top"
-                                               data-method="DELETE"
-                                               data-confirm-title="@lang('Please Confirm')"
-                                               data-confirm-text="@lang('Are you sure that you want to delete this role?')"
-                                               data-confirm-delete="@lang('Yes, delete it!')">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @else
+                    @if (count($roles))
+                        @foreach ($roles as $role)
                             <tr>
-                                <td colspan="4"><em>@lang('No records found.')</em></td>
+                                <td>{{ $role->name }}</td>
+                                <td>{{ $role->display_name }}</td>
+                                <td>{{ $role->users_count }}</td>
+                                <td class="text-center">
+                                    <a href="{{ route('roles.edit', $role) }}" class="btn btn-icon"
+                                       title="@lang('Edit Role')" data-toggle="tooltip" data-placement="top">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    @if ($role->removable)
+                                        <a href="{{ route('roles.destroy', $role) }}" class="btn btn-icon"
+                                           title="@lang('Delete Role')"
+                                           data-toggle="tooltip"
+                                           data-placement="top"
+                                           data-method="DELETE"
+                                           data-confirm-title="@lang('Please Confirm')"
+                                           data-confirm-text="@lang('Are you sure that you want to delete this role?')"
+                                           data-confirm-delete="@lang('Yes, delete it!')">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    @endif
+                                </td>
                             </tr>
-                        @endif
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="4"><em>@lang('No records found.')</em></td>
+                        </tr>
+                    @endif
                     </tbody>
                 </table>
             </div>

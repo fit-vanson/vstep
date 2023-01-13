@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
 use Vanguard\Permission;
 use Vanguard\Role;
-use Illuminate\Database\Seeder;
 
 class PermissionsSeeder extends Seeder
 {

@@ -5,14 +5,14 @@
  * clear
  */
 
-Route::get('/clear',function (){
+Route::get('/clear', function () {
     try {
-        echo  Artisan::call('optimize:clear');
-        echo  Artisan::call('cache:clear');
-        echo  Artisan::call('config:cache');
-        echo  Artisan::call('route:cache');
-    }catch (\Exception $exception){
-        \Illuminate\Support\Facades\Log::error('clear ' .$exception->getMessage());
+        echo Artisan::call('optimize:clear');
+        echo Artisan::call('cache:clear');
+        echo Artisan::call('config:cache');
+        echo Artisan::call('route:cache');
+    } catch (\Exception $exception) {
+        \Illuminate\Support\Facades\Log::error('clear ' . $exception->getMessage());
     }
 
 });
@@ -90,9 +90,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     });
 
 
-
-
-
     /**
      * Two-Factor Authentication Setup
      */
@@ -114,7 +111,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
         Route::post('two-factor/disable', 'TwoFactorController@disable')->name('two-factor.disable');
     });
-
 
 
     /**

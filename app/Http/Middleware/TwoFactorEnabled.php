@@ -10,13 +10,13 @@ class TwoFactorEnabled
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        if (! setting('2fa.enabled')) {
+        if (!setting('2fa.enabled')) {
             throw new NotFoundHttpException;
         }
 

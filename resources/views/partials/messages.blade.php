@@ -1,4 +1,3 @@
-
 @if(isset ($errors) && count($errors) > 0)
     <div class="alert alert-danger alert-notification">
         <ul class="list-unstyled mb-0">

@@ -7,7 +7,6 @@ use Vanguard\Http\Controllers\Controller;
 use Vanguard\Http\Requests\Auth\RegisterRequest;
 use Vanguard\Repositories\Role\RoleRepository;
 use Vanguard\Repositories\User\UserRepository;
-use Vanguard\Support\Enum\UserStatus;
 
 class RegisterController extends Controller
 {

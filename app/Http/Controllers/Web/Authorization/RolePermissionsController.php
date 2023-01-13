@@ -27,8 +27,9 @@ class RolePermissionsController extends Controller
     public function update(Request $request)
     {
         $roles = $request->get('roles');
-
         $allRoles = $this->roles->lists('id');
+
+
 
         foreach ($allRoles as $roleId) {
             $permissions = Arr::get($roles, $roleId, []);

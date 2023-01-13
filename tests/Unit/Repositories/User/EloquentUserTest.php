@@ -420,8 +420,8 @@ class EloquentUserTest extends TestCase
         $this->repo->setRole($user->id, $role->id);
 
         $this->assertDatabaseHas('users', [
-           'role_id' => $role->id,
-           'id' => $user->id
+            'role_id' => $role->id,
+            'id' => $user->id
         ]);
     }
 

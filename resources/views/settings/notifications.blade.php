@@ -14,17 +14,17 @@
 
 @section('content')
 
-@include('partials.messages')
+    @include('partials.messages')
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="card">
-            <h5 class="card-header">
-                @lang('Email Notifications')
-            </h5>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <h5 class="card-header">
+                    @lang('Email Notifications')
+                </h5>
 
-            <div class="card-body">
-                {!! Form::open(['route' => 'settings.notifications.update', 'id' => 'notification-settings-form']) !!}
+                <div class="card-body">
+                    {!! Form::open(['route' => 'settings.notifications.update', 'id' => 'notification-settings-form']) !!}
 
                     <div class="form-group mb-4">
                         <div class="d-flex align-items-center">
@@ -36,7 +36,7 @@
                                        class="switch"
                                        value="1"
                                        id="switch-signup-email"
-                                       {{ setting('notifications_signup_email') ? 'checked' : '' }}>
+                                    {{ setting('notifications_signup_email') ? 'checked' : '' }}>
 
                                 <label for="switch-signup-email"></label>
                             </div>
@@ -53,10 +53,10 @@
                     <button type="submit" class="btn btn-primary mt-3">
                         @lang('Update')
                     </button>
-                {!! Form::close() !!}
+                    {!! Form::close() !!}
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 @stop

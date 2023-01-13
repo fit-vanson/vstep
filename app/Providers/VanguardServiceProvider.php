@@ -10,7 +10,7 @@ use Vanguard\Support\Plugins\Dashboard\Widgets\RegistrationHistory;
 use Vanguard\Support\Plugins\Dashboard\Widgets\TotalUsers;
 use Vanguard\Support\Plugins\Dashboard\Widgets\UnconfirmedUsers;
 use Vanguard\Support\Plugins\Dashboard\Widgets\UserActions;
-use \Vanguard\UserActivity\Widgets\ActivityWidget;
+use Vanguard\UserActivity\Widgets\ActivityWidget;
 
 class VanguardServiceProvider extends BaseVanguardServiceProvider
 {

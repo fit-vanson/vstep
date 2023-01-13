@@ -2,10 +2,10 @@
 
 namespace Tests\Setup;
 
+use Facades\Tests\Setup\RoleFactory;
 use Vanguard\Role;
 use Vanguard\Support\Enum\UserStatus;
 use Vanguard\User;
-use \Facades\Tests\Setup\RoleFactory;
 
 class UserFactory
 {

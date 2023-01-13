@@ -56,7 +56,7 @@ class TwoFactorController extends ApiController
      */
     public function verify(VerifyTwoFactorTokenRequest $request, User $user)
     {
-        if (! Authy::tokenIsValid($user, $request->token)) {
+        if (!Authy::tokenIsValid($user, $request->token)) {
             return $this->setStatusCode(422)
                 ->respondWithError("Invalid 2FA token.");
         }
@@ -80,7 +80,7 @@ class TwoFactorController extends ApiController
      */
     public function destroy(User $user)
     {
-        if (! Authy::isEnabled($user)) {
+        if (!Authy::isEnabled($user)) {
             return $this->setStatusCode(422)
                 ->respondWithError("2FA is not enabled for this user.");
         }

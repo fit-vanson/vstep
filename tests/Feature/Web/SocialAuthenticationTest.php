@@ -4,16 +4,16 @@ namespace Tests\Feature\Web;
 
 use Auth;
 use DB;
+use Facades\Tests\Setup\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Socialite\Contracts\Provider as SocialiteProvider;
+use Laravel\Socialite\Contracts\User as SocialUserContract;
+use Mockery as m;
 use Socialite;
-use Facades\Tests\Setup\UserFactory;
 use Tests\TestCase;
 use Tests\UpdatesSettings;
 use Vanguard\Support\Enum\UserStatus;
 use Vanguard\User;
-use Laravel\Socialite\Contracts\User as SocialUserContract;
-use Mockery as m;
 
 class SocialAuthenticationTest extends TestCase
 {

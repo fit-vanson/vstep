@@ -5,13 +5,13 @@ namespace Vanguard;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Ramsey\Uuid\Uuid;
 
 class Categories extends Model
 {
     use HasFactory;
+
     protected $table = 'categories';
-    protected $keyType =  'string';
+    protected $keyType = 'string';
     protected $casts = [
         'removable' => 'boolean',
         'id' => 'string',
@@ -28,7 +28,7 @@ class Categories extends Model
     protected static function boot()
     {
         parent::boot();
-        static::creating(function ($obj){
+        static::creating(function ($obj) {
             $obj->id = Str::uuid();
         });
     }

@@ -39,7 +39,7 @@ class TwoFactorTokenController extends Controller
     {
         $this->validate($request, ['token' => 'required']);
 
-        if (! session('auth.2fa.id')) {
+        if (!session('auth.2fa.id')) {
             return redirect('login');
         }
 
@@ -47,11 +47,11 @@ class TwoFactorTokenController extends Controller
             $request->session()->pull('auth.2fa.id')
         );
 
-        if (! $user) {
+        if (!$user) {
             throw new NotFoundHttpException;
         }
 
-        if (! Authy::tokenIsValid($user, $request->token)) {
+        if (!Authy::tokenIsValid($user, $request->token)) {
             return redirect()->to('login')
                 ->withErrors(__('2FA Token is invalid!'));
         }

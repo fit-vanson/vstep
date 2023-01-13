@@ -1,6 +1,6 @@
 <?php
 
-namespace Vanguard\Http\Requests\Role;
+namespace Vanguard\Http\Requests\Khoahoc;
 
 use Illuminate\Validation\Rule;
 use Vanguard\Http\Requests\Request;

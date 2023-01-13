@@ -63,7 +63,7 @@
                 <table class="table table-borderless table-striped">
                     <thead>
                     <tr>
-{{--                        <th></th>--}}
+                        {{--                        <th></th>--}}
                         <th class="min-width-40">@lang('Tên bài học')</th>
                         <th class="min-width-20">@lang('Khoá học')</th>
                         <th class="min-width-20">@lang('Link 1')</th>

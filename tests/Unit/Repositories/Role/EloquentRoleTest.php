@@ -3,8 +3,8 @@
 namespace Tests\Unit\Repositories\Role;
 
 use Facades\Tests\Setup\RoleFactory;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Facades\Tests\Setup\UserFactory;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Vanguard\Events\Role\Created;
 use Vanguard\Repositories\Role\EloquentCategories;

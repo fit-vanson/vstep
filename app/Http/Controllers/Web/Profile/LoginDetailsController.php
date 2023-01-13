@@ -28,7 +28,7 @@ class LoginDetailsController extends Controller
 
         // If password is not provided, then we will
         // just remove it from $data array and do not change it
-        if (! data_get($data, 'password')) {
+        if (!data_get($data, 'password')) {
             unset($data['password']);
             unset($data['password_confirmation']);
         }

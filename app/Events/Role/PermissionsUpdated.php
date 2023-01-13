@@ -2,4 +2,6 @@
 
 namespace Vanguard\Events\Role;
 
-class PermissionsUpdated {}
+class PermissionsUpdated
+{
+}

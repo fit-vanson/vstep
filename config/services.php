@@ -35,8 +35,8 @@ return [
     ],
 
     'stripe' => [
-        'model'  => Vanguard\User::class,
-        'key'    => env('STRIPE_KEY'),
+        'model' => Vanguard\User::class,
+        'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
 

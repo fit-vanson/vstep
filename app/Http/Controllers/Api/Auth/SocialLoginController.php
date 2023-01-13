@@ -30,8 +30,8 @@ class SocialLoginController extends ApiController
             $socialUser->getId()
         );
 
-        if (! $user) {
-            if (! setting('reg_enabled')) {
+        if (!$user) {
+            if (!setting('reg_enabled')) {
                 return $this->errorForbidden("Only users who already created an account can log in.");
             }
 

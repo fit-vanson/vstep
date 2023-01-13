@@ -2,4 +2,6 @@
 
 namespace Vanguard\Events\Baihoc;
 
-class PermissionsUpdated {}
+class PermissionsUpdated
+{
+}

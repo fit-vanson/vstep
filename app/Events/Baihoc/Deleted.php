@@ -2,4 +2,6 @@
 
 namespace Vanguard\Events\Baihoc;
 
-class Deleted extends BaihocEvent {}
+class Deleted extends BaihocEvent
+{
+}

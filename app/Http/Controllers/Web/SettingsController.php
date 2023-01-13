@@ -3,10 +3,10 @@
 namespace Vanguard\Http\Controllers\Web;
 
 use Illuminate\Contracts\View\Factory;
-use Illuminate\View\View;
-use Vanguard\Events\Settings\Updated as SettingsUpdated;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Setting;
+use Vanguard\Events\Settings\Updated as SettingsUpdated;
 use Vanguard\Http\Controllers\Controller;
 
 /**

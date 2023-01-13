@@ -14,7 +14,7 @@ abstract class KhoahocEvent
 
     public function __construct(KhoaHoc $khoahoc)
     {
-        $this->khoahoc= $khoahoc;
+        $this->khoahoc = $khoahoc;
     }
 
 //    /**

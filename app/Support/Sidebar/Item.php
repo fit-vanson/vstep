@@ -120,7 +120,7 @@ class Item
      */
     public function getExpandedPath()
     {
-        if (! $this->children->count()) {
+        if (!$this->children->count()) {
             return null;
         }
 
@@ -238,8 +238,8 @@ class Item
             return call_user_func($this->permissions, $user);
         }
 
-        foreach ((array) $this->permissions as $permission) {
-            if (! $user->hasPermission($permission)) {
+        foreach ((array)$this->permissions as $permission) {
+            if (!$user->hasPermission($permission)) {
                 return false;
             }
         }

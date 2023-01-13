@@ -3,9 +3,9 @@
 namespace Vanguard\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Vanguard\User;
 
 class UserRegistered extends Mailable implements ShouldQueue

@@ -1,4 +1,3 @@
-
 // Fonts
 // Here you can import any font you want and update the _variables.scss file
 // to make use of those fonts across the application.
@@ -28,24 +27,24 @@
 @import "components/datepicker";
 
 @include media-breakpoint-down(md) {
-  .sidebar:not(.expanded) {
-    margin-left: -250px;
-  }
+    .sidebar:not(.expanded) {
+        margin-left: -250px;
+    }
 
-  .content-page {
-    margin-left: 0;
-  }
+    .content-page {
+        margin-left: 0;
+    }
 }
 
 @media (min-width: 1200px) and (max-width: 1600px) {
 
-  .widget {
-    height: 128px;
+    .widget {
+        height: 128px;
 
-    .row .text-muted {
-      width: 80px;
-      text-align: right;
-      word-wrap: normal;
+        .row .text-muted {
+            width: 80px;
+            text-align: right;
+            word-wrap: normal;
+        }
     }
-  }
 }

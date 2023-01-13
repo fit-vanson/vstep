@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Vanguard\Role;
 use Illuminate\Database\Seeder;
+use Vanguard\Role;
 
 class RolesSeeder extends Seeder
 {

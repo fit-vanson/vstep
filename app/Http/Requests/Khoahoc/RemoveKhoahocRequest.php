@@ -1,6 +1,6 @@
 <?php
 
-namespace Vanguard\Http\Requests\Categories;
+namespace Vanguard\Http\Requests\Khoahoc;
 
 use Vanguard\Http\Requests\Request;
 

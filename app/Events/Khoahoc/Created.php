@@ -2,4 +2,6 @@
 
 namespace Vanguard\Events\Khoahoc;
 
-class Created extends KhoahocEvent {}
+class Created extends KhoahocEvent
+{
+}

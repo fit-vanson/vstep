@@ -30,6 +30,7 @@ interface CategoriesRepository
      * @return mixed
      */
     public function getAllWithUsersCount();
+
     /**
      * Get all system khoá học with number of category .
      *

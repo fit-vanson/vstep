@@ -39,8 +39,8 @@ class DbSessionTest extends TestCase
         DB::table('sessions')->insert($data2);
 
         $expected = collect([
-            (object) $this->addAddMissingFields($data1),
-            (object) $this->addAddMissingFields($data2),
+            (object)$this->addAddMissingFields($data1),
+            (object)$this->addAddMissingFields($data2),
         ]);
         $expected = $expected->sortBy('id')->keyBy('id')->toArray();
 
@@ -80,7 +80,7 @@ class DbSessionTest extends TestCase
         DB::table('sessions')->insert($data2);
 
         $expected = collect([
-            (object) $this->addAddMissingFields($data1)
+            (object)$this->addAddMissingFields($data1)
         ]);
 
         $expected = $expected->sortBy('id')->keyBy('id')->toArray();

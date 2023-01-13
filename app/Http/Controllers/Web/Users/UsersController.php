@@ -47,10 +47,10 @@ class UsersController extends Controller
      * @param User $user
      * @return Factory|View
      */
-    public function show(User $user,BaihocRepository $baihocRepository)
+    public function show(User $user, BaihocRepository $baihocRepository)
     {
         $baihoc = $baihocRepository->all();
-        return view('user.view', compact('user','baihoc'));
+        return view('user.view', compact('user', 'baihoc'));
     }
 
     /**
@@ -93,16 +93,16 @@ class UsersController extends Controller
         // When user is created by administrator, we will set his
         // status to Active by default.
         $data = $request->all() + [
-            'status' => UserStatus::ACTIVE,
-            'email_verified_at' => now()
-        ];
+                'status' => UserStatus::ACTIVE,
+                'email_verified_at' => now()
+            ];
 
-        if (! data_get($data, 'country_id')) {
+        if (!data_get($data, 'country_id')) {
             $data['country_id'] = null;
         }
 
         // Username should be updated only if it is provided.
-        if (! data_get($data, 'username')) {
+        if (!data_get($data, 'username')) {
             $data['username'] = null;
         }
 

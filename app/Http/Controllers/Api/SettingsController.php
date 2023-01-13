@@ -13,6 +13,7 @@ class SettingsController extends ApiController
     {
         $this->middleware('permission:settings.general');
     }
+
     /**
      * System settings.
      * @return \Illuminate\Http\JsonResponse

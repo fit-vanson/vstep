@@ -29,7 +29,7 @@ class SocialManager
     {
         $user = $this->users->findByEmail($socialUser->getEmail());
 
-        if (! $user) {
+        if (!$user) {
             // User with email retrieved from social auth provider does not
             // exist in our database. That means that we have to create new user here
             list($firstName, $lastName) = $this->parseUserFullName($socialUser);

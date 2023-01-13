@@ -2,4 +2,6 @@
 
 namespace Vanguard\Events\User;
 
-class LoggedOut {}
+class LoggedOut
+{
+}

@@ -2,4 +2,6 @@
 
 namespace Vanguard\Events\Baihoc;
 
-class Created extends BaihocEvent {}
+class Created extends BaihocEvent
+{
+}

@@ -2,4 +2,6 @@
 
 namespace Vanguard\Events\Permission;
 
-class Created extends PermissionEvent {}
+class Created extends PermissionEvent
+{
+}

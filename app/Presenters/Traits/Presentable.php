@@ -21,6 +21,6 @@ trait Presentable
         if (property_exists($this, 'presenter') and class_exists($this->presenter)) {
             return $this->presenterInstance = new $this->presenter($this);
         }
-        throw new \Exception('Property $presenter was not set correctly in '.get_class($this));
+        throw new \Exception('Property $presenter was not set correctly in ' . get_class($this));
     }
 }

@@ -2,4 +2,6 @@
 
 namespace Vanguard\Events\Baihoc;
 
-class Updated extends BaihocEvent {}
+class Updated extends BaihocEvent
+{
+}

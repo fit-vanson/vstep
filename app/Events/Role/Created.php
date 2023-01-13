@@ -2,4 +2,6 @@
 
 namespace Vanguard\Events\Role;
 
-class Created extends RoleEvent {}
+class Created extends RoleEvent
+{
+}

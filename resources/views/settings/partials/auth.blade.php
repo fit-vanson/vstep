@@ -8,11 +8,11 @@
 
         <div class="form-group mb-4">
             <div class="d-flex align-items-center">
-                 <div class="switch">
-                     <input type="hidden" value="0" name="remember_me">
-                     {!! Form::checkbox('remember_me', 1, setting('remember_me'), ['class' => 'switch', 'id' => 'switch-remember-me']) !!}
-                     <label for="switch-remember-me"></label>
-                 </div>
+                <div class="switch">
+                    <input type="hidden" value="0" name="remember_me">
+                    {!! Form::checkbox('remember_me', 1, setting('remember_me'), ['class' => 'switch', 'id' => 'switch-remember-me']) !!}
+                    <label for="switch-remember-me"></label>
+                </div>
                 <div class="ml-3 d-flex flex-column">
                     <label class="mb-0">@lang('Allow "Remember Me"')</label>
                     <small class="pt-0 text-muted">

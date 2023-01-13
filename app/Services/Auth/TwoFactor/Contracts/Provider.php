@@ -32,7 +32,7 @@ interface Provider
      * Determine if the given token is valid for the given user.
      *
      * @param Authenticatable $user
-     * @param  string $token
+     * @param string $token
      * @return bool
      */
     public function tokenIsValid(TwoFactorAuthenticatable $user, $token);

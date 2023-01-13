@@ -2,7 +2,6 @@
 
 namespace Vanguard\Providers;
 
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Vanguard\User;
 
@@ -35,7 +34,7 @@ class AuthServiceProvider extends ServiceProvider
         \Blade::directive('permission', function ($expression) {
             return "<?php if (\\Auth::user()->hasPermission({$expression})) : ?>";
         });
-        
+
         \Blade::directive('endpermission', function ($expression) {
             return "<?php endif; ?>";
         });
@@ -45,7 +44,7 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
 
-            return (int) $user->id === (int) $session->user_id;
+            return (int)$user->id === (int)$session->user_id;
         });
     }
 }

@@ -15,7 +15,9 @@
     <td class="text-center align-middle">
         <div class="custom-control custom-checkbox">
             <div class="custom-control custom-checkbox">
-                <input class="custom-control-input" id="{{$item->id}}"  {!! $user->baihoc()->get()->contains($item) ? 'checked' : '' !!} name="roles[1][]" type="checkbox" value="{{$item->id}}">
+                <input class="custom-control-input" id="{{$item->id}}"
+                       {!! $user->baihoc()->get()->contains($item) ? 'checked' : '' !!} name="baihoc[]"
+                       type="checkbox" value="{{$item->id}}">
                 <label class="custom-control-label d-inline" for="{{$item->id}}"></label>
             </div>
         </div>

@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
 use Vanguard\Role;
 use Vanguard\Support\Enum\UserStatus;
 use Vanguard\User;
-use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {

@@ -12,19 +12,19 @@ return [
     */
 
     'social' => [
-        'providers' => ['facebook', 'twitter', 'google']
+//        'providers' => ['facebook', 'twitter', 'google']
     ],
 
-   /*
-   |--------------------------------------------------------------------------
-   | JSON API
-   |--------------------------------------------------------------------------
-   |
-   | Should our JSON api be exposed to the public? If you want to enable the
-   | API, just set the following option to "true":
-   |
-   | Default: false
-   */
+    /*
+    |--------------------------------------------------------------------------
+    | JSON API
+    |--------------------------------------------------------------------------
+    |
+    | Should our JSON api be exposed to the public? If you want to enable the
+    | API, just set the following option to "true":
+    |
+    | Default: false
+    */
 
     'expose_api' => env('EXPOSE_API', false),
 

@@ -45,7 +45,7 @@ interface Authenticatable extends BaseAuthenticatable
     /**
      * Set the two-factor provider options in array format.
      *
-     * @param  array  $options
+     * @param array $options
      * @return void
      */
     public function setTwoFactorAuthProviderOptions(array $options);

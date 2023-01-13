@@ -2,6 +2,7 @@
 
 namespace Vanguard\Http\Controllers\Web;
 
+use Authy;
 use Vanguard\Events\User\TwoFactorDisabled;
 use Vanguard\Events\User\TwoFactorEnabled;
 use Vanguard\Events\User\TwoFactorEnabledByAdmin;
@@ -10,7 +11,6 @@ use Vanguard\Http\Requests\TwoFactor\DisableTwoFactorRequest;
 use Vanguard\Http\Requests\TwoFactor\EnableTwoFactorRequest;
 use Vanguard\Http\Requests\TwoFactor\ReSendTwoFactorTokenRequest;
 use Vanguard\Http\Requests\TwoFactor\VerifyTwoFactorTokenRequest;
-use Authy;
 use Vanguard\Repositories\User\UserRepository;
 
 /**
@@ -86,7 +86,7 @@ class TwoFactorController extends Controller
     {
         $user = $request->theUser();
 
-        if (! Authy::tokenIsValid($user, $request->token)) {
+        if (!Authy::tokenIsValid($user, $request->token)) {
             return redirect()->route('two-factor.verification')
                 ->withErrors(['token' => 'Invalid 2FA token.']);
         }
@@ -121,7 +121,7 @@ class TwoFactorController extends Controller
     {
         $user = $request->theUser();
 
-        if (! Authy::isEnabled($user)) {
+        if (!Authy::isEnabled($user)) {
             abort(404);
         }
 

@@ -2,12 +2,12 @@
 
 namespace Vanguard\Services\Upload;
 
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
-use Vanguard\User;
-use Illuminate\Filesystem\Filesystem;
 use Intervention\Image\ImageManager;
+use Vanguard\User;
 
 class UserAvatarManager
 {
@@ -68,7 +68,7 @@ class UserAvatarManager
      */
     private function userHasUploadedAvatar(User $user)
     {
-        return $user->avatar && ! Str::contains($user->avatar, ['http', 'gravatar']);
+        return $user->avatar && !Str::contains($user->avatar, ['http', 'gravatar']);
     }
 
     /**
@@ -86,7 +86,7 @@ class UserAvatarManager
      */
     public function deleteAvatarIfUploaded(User $user)
     {
-        if (! $this->userHasUploadedAvatar($user)) {
+        if (!$this->userHasUploadedAvatar($user)) {
             return;
         }
 
@@ -116,7 +116,7 @@ class UserAvatarManager
             // value will be used as width and height for cropped image.
             $size = floor($points['x2'] - $points['x1']);
 
-            $image->crop($size, $size, (int) $points['x1'], (int) $points['y1'])
+            $image->crop($size, $size, (int)$points['x1'], (int)$points['y1'])
                 ->resize(self::AVATAR_WIDTH, self::AVATAR_HEIGHT);
         } else {
             // If crop points are not provided, we will just crop

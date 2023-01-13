@@ -3,7 +3,6 @@
 namespace Vanguard\Http\Requests\User;
 
 use Vanguard\Http\Requests\Request;
-use Vanguard\User;
 
 class UpdateBaihocRequest extends Request
 {

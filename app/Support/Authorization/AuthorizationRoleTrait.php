@@ -80,7 +80,7 @@ trait AuthorizationRoleTrait
      */
     public function savePermissions($inputPermissions)
     {
-        if (! empty($inputPermissions)) {
+        if (!empty($inputPermissions)) {
             $this->permissions()->sync($inputPermissions);
         } else {
             $this->permissions()->detach();
@@ -178,7 +178,7 @@ trait AuthorizationRoleTrait
      */
     private function getCacheKey()
     {
-        return 'permissions_for_role_'.$this->{$this->primaryKey};
+        return 'permissions_for_role_' . $this->{$this->primaryKey};
     }
 
     /**

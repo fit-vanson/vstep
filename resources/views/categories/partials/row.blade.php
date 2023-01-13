@@ -1,13 +1,13 @@
 <tr>
 
     <td class="align-middle">
-{{--        <a href="{{ route('categories.show', $category) }}">--}}
-            {{ $category->cate_name ?: __('N/A') }}
-{{--        </a>--}}
+        {{--        <a href="{{ route('categories.show', $category) }}">--}}
+        {{ $category->cate_name ?: __('N/A') }}
+        {{--        </a>--}}
     </td>
     <td class="align-middle">
         <a href="{{ route('khoahoc.index', ['cate_id'=>$category->id]) }}">
-             {{ $category->khoahoc ? count($category->khoahoc): __('N/A') }}
+            {{ $category->khoahoc ? count($category->khoahoc): __('N/A') }}
         </a>
     </td>
 

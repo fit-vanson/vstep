@@ -4,6 +4,7 @@ namespace Vanguard\Providers;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\ServiceProvider;
 use Vanguard\Repositories\Baihoc\BaihocRepository;
 use Vanguard\Repositories\Baihoc\EloquentBaihoc;
 use Vanguard\Repositories\Categories\CategoriesRepository;
@@ -20,7 +21,6 @@ use Vanguard\Repositories\Session\DbSession;
 use Vanguard\Repositories\Session\SessionRepository;
 use Vanguard\Repositories\User\EloquentUser;
 use Vanguard\Repositories\User\UserRepository;
-use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
         \Illuminate\Database\Schema\Builder::defaultStringLength(191);
 
         Factory::guessFactoryNamesUsing(function (string $modelName) {
-            return 'Database\Factories\\'.class_basename($modelName).'Factory';
+            return 'Database\Factories\\' . class_basename($modelName) . 'Factory';
         });
 
         \Illuminate\Pagination\Paginator::useBootstrap();

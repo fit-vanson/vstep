@@ -14,7 +14,7 @@ abstract class CategoriesEvent
 
     public function __construct(Categories $category)
     {
-        $this->category= $category;
+        $this->category = $category;
     }
 
     /**

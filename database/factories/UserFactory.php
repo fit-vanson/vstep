@@ -38,7 +38,7 @@ class UserFactory extends Factory
             },
             'status' => \Vanguard\Support\Enum\UserStatus::ACTIVE,
             'birthday' => $this->faker->date(),
-            'email_verified_at' => (string) now()
+            'email_verified_at' => (string)now()
         ];
     }
 }

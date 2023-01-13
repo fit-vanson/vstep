@@ -2,4 +2,6 @@
 
 namespace Vanguard\Events\Role;
 
-class Deleted extends RoleEvent {}
+class Deleted extends RoleEvent
+{
+}

@@ -30,7 +30,7 @@
                        name="birthday"
                        id='birthday'
                        value="{{ $edit && $user->birthday ? $user->present()->birthday : '' }}"
-                       class="form-control input-solid" />
+                       class="form-control input-solid"/>
             </div>
         </div>
         <div class="form-group">

@@ -18,23 +18,24 @@ class BaihocController extends Controller
         // Allow access to authenticated users only.
         $this->middleware('auth');
 //        $this->middleware('permission:baihoc.manage', ['only' => 'edit']);
-        $this->middleware('permission:baihoc.manage', ['only' => ['create','edit','destroy']]);
+        $this->middleware('permission:baihoc.manage', ['only' => ['create', 'edit', 'destroy']]);
 
     }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request,KhoahocRepository $khoahocRepository)
+    public function index(Request $request, KhoahocRepository $khoahocRepository)
     {
-        if(\Auth::user()->role->name ==='User'){
+        if (\Auth::user()->role->name === 'User') {
 
             dd(1);
-        }else{
-            $baihoc = $this->baihoc->paginate($perPage = 20, $request->search,$request->khoahoc_id);
+        } else {
+            $baihoc = $this->baihoc->paginate($perPage = 20, $request->search, $request->khoahoc_id);
             $khoahocs = ['' => __('All')] + $khoahocRepository->lists()->toArray();
-            return view('baihoc.index', compact('baihoc','khoahocs'));
+            return view('baihoc.index', compact('baihoc', 'khoahocs'));
         }
 
     }
@@ -56,7 +57,7 @@ class BaihocController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(CreateBaihocRequest $request)
@@ -69,7 +70,7 @@ class BaihocController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -80,15 +81,15 @@ class BaihocController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Baihoc $baihoc,KhoahocRepository $khoahocRepository)
+    public function edit(Baihoc $baihoc, KhoahocRepository $khoahocRepository)
     {
         return view('baihoc.add-edit', [
             'baihoc' => $baihoc,
             'khoahoc' => $khoahocRepository->lists(),
-            'statuses' => ['Hoạt động','Dừng'],
+            'statuses' => ['Hoạt động', 'Dừng'],
             'edit' => true
         ]);
     }
@@ -96,8 +97,8 @@ class BaihocController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Baihoc $baihoc, UpdateBaihocRequest $request)
@@ -110,7 +111,7 @@ class BaihocController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Baihoc $baihoc)

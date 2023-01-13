@@ -5,7 +5,6 @@ namespace Tests\Feature\Web;
 use Carbon\Carbon;
 use Facades\Tests\Setup\UserFactory;
 use Hash;
-use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Storage;
@@ -14,7 +13,6 @@ use Vanguard\Events\User\ChangedAvatar;
 use Vanguard\Events\User\UpdatedProfileDetails;
 use Vanguard\Role;
 use Vanguard\Support\Enum\UserStatus;
-use Vanguard\UserActivity\Logger;
 
 class UpdateProfileTest extends TestCase
 {
@@ -60,9 +58,9 @@ class UpdateProfileTest extends TestCase
 
         $this->assertSessionHasSuccess('Profile updated successfully.');
         $this->assertDatabaseHas('users', $data + [
-            'id' => auth()->id(),
-            'status' => UserStatus::ACTIVE,
-        ]);
+                'id' => auth()->id(),
+                'status' => UserStatus::ACTIVE,
+            ]);
     }
 
     /** @test */

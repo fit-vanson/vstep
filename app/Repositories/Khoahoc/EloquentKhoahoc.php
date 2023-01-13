@@ -19,7 +19,7 @@ class EloquentKhoahoc implements KhoahocRepository
         return KhoaHoc::all();
     }
 
-    public function paginate($perPage, $search = null,$cate_id = null)
+    public function paginate($perPage, $search = null, $cate_id = null)
     {
         $query = KhoaHoc::query();
 

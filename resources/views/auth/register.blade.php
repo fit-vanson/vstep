@@ -24,7 +24,8 @@
 
                     @include('partials/messages')
 
-                    <form role="form" action="<?= url('register') ?>" method="post" id="registration-form" autocomplete="off" class="mt-3">
+                    <form role="form" action="<?= url('register') ?>" method="post" id="registration-form"
+                          autocomplete="off" class="mt-3">
                         <input type="hidden" value="<?= csrf_token() ?>" name="_token">
                         <div class="form-group">
                             <input type="email"
@@ -49,7 +50,7 @@
                                    class="form-control input-solid"
                                    placeholder="@lang('Password')">
                         </div>
-                         <div class="form-group">
+                        <div class="form-group">
                             <input type="password"
                                    name="password_confirmation"
                                    id="password_confirmation"

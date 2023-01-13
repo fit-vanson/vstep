@@ -39,7 +39,7 @@ class DetailsController extends ApiController
             'phone', 'address', 'country_id'
         ])->toArray();
 
-        if (! isset($data['country_id'])) {
+        if (!isset($data['country_id'])) {
             $data['country_id'] = $user->country_id;
         }
 

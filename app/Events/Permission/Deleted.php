@@ -2,4 +2,6 @@
 
 namespace Vanguard\Events\Permission;
 
-class Deleted extends PermissionEvent {}
+class Deleted extends PermissionEvent
+{
+}

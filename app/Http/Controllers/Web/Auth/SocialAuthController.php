@@ -50,13 +50,13 @@ class SocialAuthController extends Controller
 
         $user = $this->users->findBySocialId($provider, $socialUser->getId());
 
-        if (! $user) {
-            if (! setting('reg_enabled')) {
+        if (!$user) {
+            if (!setting('reg_enabled')) {
                 return redirect('login')
                     ->withErrors(__('Only users who already created an account can log in.'));
             }
 
-            if (! $socialUser->getEmail()) {
+            if (!$socialUser->getEmail()) {
                 return redirect('login')
                     ->withErrors(__('You have to provide your email address.'));
             }

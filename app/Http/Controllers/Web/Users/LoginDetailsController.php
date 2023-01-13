@@ -29,7 +29,7 @@ class LoginDetailsController extends Controller
     {
         $data = $request->all();
 
-        if (! $data['password']) {
+        if (!$data['password']) {
             unset($data['password']);
             unset($data['password_confirmation']);
         }

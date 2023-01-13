@@ -2,4 +2,6 @@
 
 namespace Vanguard\Events\Categories;
 
-class Deleted extends CategoriesEvent {}
+class Deleted extends CategoriesEvent
+{
+}

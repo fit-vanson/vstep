@@ -2,8 +2,8 @@
 
 namespace Vanguard\Http\Requests\Auth;
 
-use Vanguard\Http\Requests\Request;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+use Vanguard\Http\Requests\Request;
 
 class LoginRequest extends Request
 {
@@ -55,7 +55,7 @@ class LoginRequest extends Request
     {
         $factory = $this->container->make(ValidationFactory::class);
 
-        return ! $factory->make(
+        return !$factory->make(
             ['username' => $param],
             ['username' => 'email']
         )->fails();

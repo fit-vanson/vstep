@@ -32,7 +32,7 @@ class VerificationController extends ApiController
      */
     public function verify(ApiVerifyEmailRequest $request)
     {
-        if (! setting('reg_email_confirmation')) {
+        if (!setting('reg_email_confirmation')) {
             return $this->errorNotFound();
         }
 
@@ -63,15 +63,15 @@ class VerificationController extends ApiController
             $baseRequest->only('expires', 'signature')
         );
 
-        if (! $request->hasValidSignature()) {
+        if (!$request->hasValidSignature()) {
             throw new InvalidSignatureException;
         }
 
-        if (! hash_equals((string) $baseRequest->id, (string) auth()->user()->getKey())) {
+        if (!hash_equals((string)$baseRequest->id, (string)auth()->user()->getKey())) {
             throw new AuthorizationException;
         }
 
-        if (! hash_equals((string) $baseRequest->hash, sha1(auth()->user()->getEmailForVerification()))) {
+        if (!hash_equals((string)$baseRequest->hash, sha1(auth()->user()->getEmailForVerification()))) {
             throw new AuthorizationException;
         }
     }
@@ -88,7 +88,7 @@ class VerificationController extends ApiController
     /**
      * Resend the email verification notification.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function resend(Request $request)

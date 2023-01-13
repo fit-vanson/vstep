@@ -31,7 +31,7 @@ class RegistrationController extends ApiController
 
         return $this->setStatusCode(201)
             ->respondWithArray([
-                'requires_email_confirmation' => !! setting('reg_email_confirmation')
+                'requires_email_confirmation' => !!setting('reg_email_confirmation')
             ]);
     }
 
@@ -42,7 +42,7 @@ class RegistrationController extends ApiController
      */
     public function verifyEmail($token)
     {
-        if (! setting('reg_email_confirmation')) {
+        if (!setting('reg_email_confirmation')) {
             return $this->errorNotFound();
         }
 

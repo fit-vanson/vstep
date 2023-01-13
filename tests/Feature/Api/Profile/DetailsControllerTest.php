@@ -53,7 +53,7 @@ class DetailsControllerTest extends ApiTestCase
 
         $data = [
             'first_name' => 'John',
-            'last_name'  => 'Doe'
+            'last_name' => 'Doe'
         ];
 
         $response = $this->patchJson("/api/me/details", $data);

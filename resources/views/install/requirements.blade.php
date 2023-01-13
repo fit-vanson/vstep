@@ -6,7 +6,8 @@
 
     @if (! $allLoaded)
         <div class="alert alert-danger">
-            <strong>Oh snap!</strong> Your system does not meet the requirements. You have to fix them in order to continue.
+            <strong>Oh snap!</strong> Your system does not meet the requirements. You have to fix them in order to
+            continue.
         </div>
     @endif
 
@@ -15,14 +16,14 @@
         <hr>
         <ul class="list-group mb-4">
             @foreach ($requirements as $extension => $loaded)
-            <li class="list-group-item {{ ! $loaded ? 'list-group-item-danger' : '' }}">
-                {{ $extension }}
-                @if ($loaded)
-                    <span class="badge badge-success float-right"><i class="fa fa-check"></i></span>
-                @else
-                    <span class="badge badge-danger float-right"><i class="fa fa-times"></i></span>
-                @endif
-            </li>
+                <li class="list-group-item {{ ! $loaded ? 'list-group-item-danger' : '' }}">
+                    {{ $extension }}
+                    @if ($loaded)
+                        <span class="badge badge-success float-right"><i class="fa fa-check"></i></span>
+                    @else
+                        <span class="badge badge-danger float-right"><i class="fa fa-times"></i></span>
+                    @endif
+                </li>
             @endforeach
         </ul>
         @if ($allLoaded)

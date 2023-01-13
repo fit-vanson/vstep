@@ -32,7 +32,7 @@ trait AuthorizationUserTrait
      */
     public function hasPermission($permission, $allRequired = true)
     {
-        $permission = (array) $permission;
+        $permission = (array)$permission;
 
         return $allRequired
             ? $this->hasAllPermissions($permission)
@@ -51,7 +51,7 @@ trait AuthorizationUserTrait
         $availablePermissions = $this->role->cachedPermissions()->pluck('name')->toArray();
 
         foreach ($permissions as $perm) {
-            if (! in_array($perm, $availablePermissions, true)) {
+            if (!in_array($perm, $availablePermissions, true)) {
                 return false;
             }
         }

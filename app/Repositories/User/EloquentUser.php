@@ -2,16 +2,15 @@
 
 namespace Vanguard\Repositories\User;
 
+use Carbon\Carbon;
+use DB;
+use Laravel\Socialite\Contracts\User as SocialUser;
 use Vanguard\Http\Filters\UserKeywordSearch;
 use Vanguard\Repositories\Role\RoleRepository;
 use Vanguard\Role;
 use Vanguard\Services\Auth\Social\ManagesSocialAvatarSize;
 use Vanguard\Services\Upload\UserAvatarManager;
 use Vanguard\User;
-use Carbon\Carbon;
-use DB;
-use Illuminate\Database\SQLiteConnection;
-use Laravel\Socialite\Contracts\User as SocialUser;
 
 class EloquentUser implements UserRepository
 {

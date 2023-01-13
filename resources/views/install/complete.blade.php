@@ -19,7 +19,7 @@
 
         @if (is_writable(base_path()))
             <p><strong>Important!</strong> Since your root directory is still writable,
-            you can change the permissions to 755 to make it writable only by root user.</p>
+                you can change the permissions to 755 to make it writable only by root user.</p>
         @endif
 
         <a class="btn btn-primary float-right" href="{{ url('login') }}">

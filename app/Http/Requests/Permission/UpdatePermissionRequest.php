@@ -7,7 +7,7 @@ use Vanguard\Rules\ValidPermissionName;
 
 class UpdatePermissionRequest extends BasePermissionRequest
 {
-   /**
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array

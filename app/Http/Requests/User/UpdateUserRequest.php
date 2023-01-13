@@ -5,7 +5,6 @@ namespace Vanguard\Http\Requests\User;
 use Illuminate\Validation\Rule;
 use Vanguard\Http\Requests\Request;
 use Vanguard\Support\Enum\UserStatus;
-use Vanguard\User;
 
 class UpdateUserRequest extends Request
 {

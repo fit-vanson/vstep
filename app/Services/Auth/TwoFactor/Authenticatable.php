@@ -38,7 +38,7 @@ trait Authenticatable
      * Set the country code and phone number used for two-factor authentication.
      *
      * @param $countryCode
-     * @param  string $phoneNumber
+     * @param string $phoneNumber
      */
     public function setAuthPhoneInformation($countryCode, $phoneNumber)
     {
@@ -59,7 +59,7 @@ trait Authenticatable
     /**
      * Set the two-factor provider options in array format.
      *
-     * @param  array  $options
+     * @param array $options
      * @return void
      */
     public function setTwoFactorAuthProviderOptions(array $options)

@@ -14,13 +14,13 @@ class CheckRole
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next, $role)
     {
-        if ($this->auth->guest() || ! $request->user()->hasRole($role)) {
+        if ($this->auth->guest() || !$request->user()->hasRole($role)) {
             abort(403);
         }
 

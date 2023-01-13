@@ -17,14 +17,14 @@
 </head>
 <body class="auth">
 
-    <div class="container">
-        @yield('content')
-    </div>
+<div class="container">
+    @yield('content')
+</div>
 
-    {!! HTML::script('assets/js/vendor.js') !!}
-    {!! HTML::script('assets/js/as/app.js') !!}
-    {!! HTML::script('assets/js/as/btn.js') !!}
-    @yield('scripts')
-    @hook('auth:scripts')
+{!! HTML::script('assets/js/vendor.js') !!}
+{!! HTML::script('assets/js/as/app.js') !!}
+{!! HTML::script('assets/js/as/btn.js') !!}
+@yield('scripts')
+@hook('auth:scripts')
 </body>
 </html>

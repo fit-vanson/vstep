@@ -58,7 +58,7 @@ class LoginController extends Controller
 
         $credentials = $request->getCredentials();
 
-        if (! Auth::validate($credentials)) {
+        if (!Auth::validate($credentials)) {
             // If the login attempt was unsuccessful we will increment the number of attempts
             // to login and redirect the user back to the login form. Of course, when this
             // user surpasses their maximum number of attempts they will get locked out.
@@ -85,8 +85,8 @@ class LoginController extends Controller
     /**
      * Send the response after the user was authenticated.
      *
-     * @param  Request $request
-     * @param  bool $throttles
+     * @param Request $request
+     * @param bool $throttles
      * @param $user
      * @return RedirectResponse|Response
      */

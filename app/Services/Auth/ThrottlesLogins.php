@@ -57,7 +57,7 @@ trait ThrottlesLogins
     /**
      * Get the login lockout error message.
      *
-     * @param  int  $seconds
+     * @param int $seconds
      * @return string
      */
     protected function getLockoutErrorMessage($seconds)
@@ -74,7 +74,7 @@ trait ThrottlesLogins
     /** @inheritDoc */
     protected function decayMinutes()
     {
-        $lockout = (int) setting('throttle_lockout_time');
+        $lockout = (int)setting('throttle_lockout_time');
 
         return $lockout <= 1 ? 1 : $lockout;
     }

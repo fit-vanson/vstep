@@ -26,7 +26,7 @@ class InstallController extends Controller
 
     public function permissions()
     {
-        if (! $this->allRequirementsLoaded()) {
+        if (!$this->allRequirementsLoaded()) {
             return redirect()->route('install.requirements');
         }
 
@@ -38,11 +38,11 @@ class InstallController extends Controller
 
     public function databaseInfo()
     {
-        if (! $this->allRequirementsLoaded()) {
+        if (!$this->allRequirementsLoaded()) {
             return redirect()->route('install.requirements');
         }
 
-        if (! $this->allPermissionsGranted()) {
+        if (!$this->allPermissionsGranted()) {
             return redirect()->route('install.permissions');
         }
 
@@ -51,17 +51,17 @@ class InstallController extends Controller
 
     public function installation(Request $request)
     {
-        if (! $this->allRequirementsLoaded()) {
+        if (!$this->allRequirementsLoaded()) {
             return redirect()->route('install.requirements');
         }
 
-        if (! $this->allPermissionsGranted()) {
+        if (!$this->allPermissionsGranted()) {
             return redirect()->route('install.permissions');
         }
 
         $dbCredentials = $request->only('host', 'username', 'password', 'database', 'prefix');
 
-        if (! $this->dbCredentialsAreValid($dbCredentials)) {
+        if (!$this->dbCredentialsAreValid($dbCredentials)) {
             return redirect()->route('install.database')
                 ->withInput(array_except($dbCredentials, 'password'))
                 ->withErrors("Connection to your database cannot be established.
@@ -85,11 +85,11 @@ class InstallController extends Controller
             $path = base_path('.env');
             $env = file_get_contents($path);
 
-            $env = str_replace('DB_HOST='.env('DB_HOST'), sprintf('DB_HOST="%s"', $db['host']), $env);
-            $env = str_replace('DB_DATABASE='.env('DB_DATABASE'), sprintf('DB_DATABASE="%s"', $db['database']), $env);
-            $env = str_replace('DB_USERNAME='.env('DB_USERNAME'), sprintf('DB_USERNAME="%s"', $db['username']), $env);
-            $env = str_replace('DB_PASSWORD='.env('DB_PASSWORD'), sprintf('DB_PASSWORD="%s"', $db['password']), $env);
-            $env = str_replace('DB_PREFIX='.env('DB_PREFIX'), sprintf('DB_PREFIX="%s"', $db['prefix']), $env);
+            $env = str_replace('DB_HOST=' . env('DB_HOST'), sprintf('DB_HOST="%s"', $db['host']), $env);
+            $env = str_replace('DB_DATABASE=' . env('DB_DATABASE'), sprintf('DB_DATABASE="%s"', $db['database']), $env);
+            $env = str_replace('DB_USERNAME=' . env('DB_USERNAME'), sprintf('DB_USERNAME="%s"', $db['username']), $env);
+            $env = str_replace('DB_PASSWORD=' . env('DB_PASSWORD'), sprintf('DB_PASSWORD="%s"', $db['password']), $env);
+            $env = str_replace('DB_PREFIX=' . env('DB_PREFIX'), sprintf('DB_PREFIX="%s"', $db['prefix']), $env);
 
             file_put_contents($path, $env);
 
@@ -228,11 +228,11 @@ class InstallController extends Controller
         $default = config('database.default');
 
         config([
-            "database.connections.{$default}.host"     => $credentials['host'],
+            "database.connections.{$default}.host" => $credentials['host'],
             "database.connections.{$default}.database" => $credentials['database'],
             "database.connections.{$default}.username" => $credentials['username'],
             "database.connections.{$default}.password" => $credentials['password'],
-            "database.connections.{$default}.prefix"   => $credentials['prefix']
+            "database.connections.{$default}.prefix" => $credentials['prefix']
         ]);
     }
 }

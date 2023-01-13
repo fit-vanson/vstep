@@ -2,4 +2,6 @@
 
 namespace Vanguard\Events\Categories;
 
-class Created extends CategoriesEvent {}
+class Created extends CategoriesEvent
+{
+}

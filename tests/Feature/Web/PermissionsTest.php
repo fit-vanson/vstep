@@ -4,7 +4,6 @@ namespace Tests\Feature\Web;
 
 use Facades\Tests\Setup\RoleFactory;
 use Facades\Tests\Setup\UserFactory;
-use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Vanguard\Events\Permission\Created;

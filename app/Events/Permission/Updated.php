@@ -2,4 +2,6 @@
 
 namespace Vanguard\Events\Permission;
 
-class Updated extends PermissionEvent {}
+class Updated extends PermissionEvent
+{
+}

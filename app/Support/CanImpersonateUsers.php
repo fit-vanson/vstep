@@ -23,6 +23,6 @@ trait CanImpersonateUsers
      */
     public function canBeImpersonated()
     {
-        return ! app('impersonate')->isImpersonating();
+        return !app('impersonate')->isImpersonating();
     }
 }

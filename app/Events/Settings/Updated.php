@@ -2,4 +2,6 @@
 
 namespace Vanguard\Events\Settings;
 
-class Updated {}
+class Updated
+{
+}

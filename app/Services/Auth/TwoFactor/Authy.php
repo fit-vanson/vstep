@@ -4,8 +4,8 @@ namespace Vanguard\Services\Auth\TwoFactor;
 
 use Exception;
 use GuzzleHttp\Client as HttpClient;
-use Vanguard\Services\Auth\TwoFactor\Contracts\Provider;
 use Vanguard\Services\Auth\TwoFactor\Contracts\Authenticatable as TwoFactorAuthenticatable;
+use Vanguard\Services\Auth\TwoFactor\Contracts\Provider;
 
 class Authy implements Provider
 {
@@ -31,7 +31,7 @@ class Authy implements Provider
     {
         $key = config('services.authy.key');
 
-        $response = json_decode((new HttpClient)->post('https://api.authy.com/protected/json/users/new?api_key='.$key, [
+        $response = json_decode((new HttpClient)->post('https://api.authy.com/protected/json/users/new?api_key=' . $key, [
             'form_params' => [
                 'user' => [
                     'email' => $user->getEmailForTwoFactorAuth(),
@@ -56,7 +56,7 @@ class Authy implements Provider
         $options = $user->getTwoFactorAuthProviderOptions();
 
         $response = json_decode((new HttpClient)->get(
-            'https://api.authy.com/protected/json/sms/'.$options['id'].'?force=true&api_key='.$key
+            'https://api.authy.com/protected/json/sms/' . $options['id'] . '?force=true&api_key=' . $key
         )->getBody(), true);
 
         return $response['success'] === true;
@@ -66,7 +66,7 @@ class Authy implements Provider
      * Determine if the given token is valid for the given user.
      *
      * @param TwoFactorAuthenticatable $user
-     * @param  string $token
+     * @param string $token
      * @return bool
      */
     public function tokenIsValid(TwoFactorAuthenticatable $user, $token)
@@ -77,7 +77,7 @@ class Authy implements Provider
             $options = $user->getTwoFactorAuthProviderOptions();
 
             $response = json_decode((new HttpClient)->get(
-                'https://api.authy.com/protected/json/verify/'.$token.'/'.$options['id'].'?force=true&api_key='.$key
+                'https://api.authy.com/protected/json/verify/' . $token . '/' . $options['id'] . '?force=true&api_key=' . $key
             )->getBody(), true);
 
             return $response['token'] === 'is valid';
@@ -99,7 +99,7 @@ class Authy implements Provider
         $options = $user->getTwoFactorAuthProviderOptions();
 
         (new HttpClient)->post(
-            'https://api.authy.com/protected/json/users/delete/'.$options['id'].'?api_key='.$key
+            'https://api.authy.com/protected/json/users/delete/' . $options['id'] . '?api_key=' . $key
         );
 
         $user->setTwoFactorAuthProviderOptions([]);

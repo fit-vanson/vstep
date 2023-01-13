@@ -2,4 +2,6 @@
 
 namespace Vanguard\Events\Khoahoc;
 
-class PermissionsUpdated {}
+class PermissionsUpdated
+{
+}

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Vanguard\Events\User\Banned;
 use Vanguard\Events\User\UpdatedByAdmin;
 use Vanguard\Http\Controllers\Controller;
+use Vanguard\Http\Requests\User\UpdateBaihocRequest;
 use Vanguard\Http\Requests\User\UpdateDetailsRequest;
 use Vanguard\Repositories\User\UserRepository;
 use Vanguard\Support\Enum\UserStatus;
@@ -32,7 +33,7 @@ class DetailsController extends Controller
     {
         $data = $request->all();
 
-        if (! data_get($data, 'country_id')) {
+        if (!data_get($data, 'country_id')) {
             $data['country_id'] = null;
         }
 
@@ -64,19 +65,12 @@ class DetailsController extends Controller
             && $request->status == UserStatus::BANNED;
     }
 
-    public function updateBaihoc(User $user, UpdateDetailsRequest $request)
+    public function updateBaihoc(User $user, UpdateBaihocRequest $request)
     {
         $data = $request->all();
-        dd($data);
-
-        if (! data_get($data, 'country_id')) {
-            $data['country_id'] = null;
-        }
-
-        $this->users->update($user->id, $data);
-        $this->users->setRole($user->id, $request->role_id);
-
+        $user->baihoc()->sync($data['baihoc']);
         event(new UpdatedByAdmin($user));
+
 
         // If user status was updated to "Banned",
         // fire the appropriate event.

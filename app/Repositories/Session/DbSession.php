@@ -3,9 +3,9 @@
 namespace Vanguard\Repositories\Session;
 
 use Carbon\Carbon;
+use DB;
 use Jenssegers\Agent\Agent;
 use Vanguard\Repositories\User\UserRepository;
-use DB;
 
 class DbSession implements SessionRepository
 {

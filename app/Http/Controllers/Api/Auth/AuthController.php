@@ -64,7 +64,7 @@ class AuthController extends ApiController
     {
         $user = User::where($request->getCredentials())->first();
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'username' => [trans('auth.failed')],
             ]);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Vanguard\Http\Requests\Role;
+namespace Vanguard\Http\Requests\Categories;
 
 use Illuminate\Validation\Rule;
 use Vanguard\Http\Requests\Request;

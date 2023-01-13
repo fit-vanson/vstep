@@ -3,8 +3,8 @@
 namespace Vanguard\Repositories\User;
 
 use Carbon\Carbon;
+use Laravel\Socialite\Contracts\User as SocialUser;
 use Vanguard\User;
-use \Laravel\Socialite\Contracts\User as SocialUser;
 
 interface UserRepository
 {

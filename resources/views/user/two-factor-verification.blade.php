@@ -15,22 +15,22 @@
 
 @section('content')
 
-@include('partials.messages')
+    @include('partials.messages')
 
-<div class="row">
-    <div class="col-md-6 m-auto">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title card-title-bold">
-                    @lang('Phone Verification')
-                </h5>
+    <div class="row">
+        <div class="col-md-6 m-auto">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title card-title-bold">
+                        @lang('Phone Verification')
+                    </h5>
 
-                <p>
-                    @lang('We have sent you a verification token via SMS. Please provide the token
-                    below to verify your phone number.')
-                </p>
+                    <p>
+                        @lang('We have sent you a verification token via SMS. Please provide the token
+                        below to verify your phone number.')
+                    </p>
 
-                {!! Form::open(['route' => "two-factor.verify", 'id' => 'two-factor-form']) !!}
+                    {!! Form::open(['route' => "two-factor.verify", 'id' => 'two-factor-form']) !!}
                     @if ($user)
                         <input type="hidden" name="user" value="{{ $user }}">
                     @endif
@@ -55,11 +55,11 @@
                             @lang('Resend Token')
                         </a>
                     </div>
-                {!! Form::close() !!}
+                    {!! Form::close() !!}
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 @stop
 
