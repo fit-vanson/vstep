@@ -14,45 +14,45 @@
 
 @section('content')
 
-@include('partials.messages')
+    @include('partials.messages')
 
-@if ($edit)
-    {!! Form::open(['route' => ['categories.update', $category], 'method' => 'PUT', 'id' => 'category-form']) !!}
-@else
-    {!! Form::open(['route' => 'categories.store', 'id' => 'category-form']) !!}
-@endif
+    @if ($edit)
+        {!! Form::open(['route' => ['categories.update', $category], 'method' => 'PUT', 'id' => 'category-form']) !!}
+    @else
+        {!! Form::open(['route' => 'categories.store', 'id' => 'category-form']) !!}
+    @endif
 
-<div class="card">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-3">
-                <h5 class="card-title">
-                    @lang('Categories Details')
-                </h5>
-                <p class="text-muted">
-                    @lang('A general role information.')
-                </p>
-            </div>
-            <div class="col-md-9">
-                <div class="form-group">
-                    <label for="name">@lang('Name')</label>
-                    <input type="text"
-                           class="form-control input-solid"
-                           id="cate_name"
-                           name="cate_name"
-                           placeholder="@lang('Categories Name')"
-                           value="{{ $edit ? $category->cate_name : old('name') }}">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5 class="card-title">
+                        @lang('Categories Details')
+                    </h5>
+                    <p class="text-muted">
+                        @lang('A general role information.')
+                    </p>
                 </div>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <label for="name">@lang('Name')</label>
+                        <input type="text"
+                               class="form-control input-solid"
+                               id="cate_name"
+                               name="cate_name"
+                               placeholder="@lang('Categories Name')"
+                               value="{{ $edit ? $category->cate_name : old('name') }}">
+                    </div>
 
 
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<button type="submit" class="btn btn-primary">
-    {{ __($edit ? 'Update Category' : 'Create Category') }}
-</button>
+    <button type="submit" class="btn btn-primary">
+        {{ __($edit ? 'Update Category' : 'Create Category') }}
+    </button>
 
 @stop
 
