@@ -11,18 +11,20 @@ use Vanguard\Http\Controllers\Controller;
 use Vanguard\Http\Resources\BaihocResource;
 use Vanguard\KhoaHoc;
 use Vanguard\Repositories\Baihoc\BaihocRepository;
+use Vanguard\User;
 
 class BaihocController extends Controller
 {
     public function __construct(private BaihocRepository $baihoc)
     {
         // Allow access to authenticated users only.
-        $this->middleware('auth');
-        $this->middleware('permission:baihoc.manage', ['only' => ['create', 'edit', 'destroy']]);
+
     }
 
     public function getbykhoahoc($id,Request $request)
     {
+        $this->middleware('auth');
+        $this->middleware('permission:baihoc.manage', ['only' => ['create', 'edit', 'destroy']]);
         $baihocs = QueryBuilder::for(Baihoc::where('khoahoc_id', $id))
             ->paginate($request->per_page ?: 20);
         return BaihocResource::collection($baihocs);
@@ -30,6 +32,8 @@ class BaihocController extends Controller
 
     public function getzipfile($id,Request $request)
     {
+        $this->middleware('auth');
+        $this->middleware('permission:baihoc.manage', ['only' => ['create', 'edit', 'destroy']]);
         $baihoc = QueryBuilder::for(Baihoc::where('id', $id))
             ->firstOrFail();
         $file = $request->file;
@@ -63,6 +67,8 @@ class BaihocController extends Controller
 
     public function updateOrCreate(Request $request)
     {
+        $this->middleware('auth');
+        $this->middleware('permission:baihoc.manage', ['only' => ['create', 'edit', 'destroy']]);
         $data = collect($request->all());
 
         $data = $data->only([
@@ -83,6 +89,15 @@ class BaihocController extends Controller
             $data
         );
         return new BaihocResource($baihoc);
+    }
+
+    public function baihocByUser($userName,Request $request){
+        $user = QueryBuilder::for(User::where('username', $userName))
+            ->first();
+        $baihocs = $user->baihoc->all();
+
+        $baihocsResource = BaihocResource::collection($baihocs);
+        return response()->json($baihocsResource);
     }
 
 }

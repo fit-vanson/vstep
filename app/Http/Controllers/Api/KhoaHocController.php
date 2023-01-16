@@ -12,13 +12,14 @@ use Vanguard\Http\Resources\KhoahocResource;
 use Vanguard\KhoaHoc;
 use Vanguard\Repositories\Khoahoc\KhoahocRepository;
 use Spatie\QueryBuilder\QueryBuilder;
+use Vanguard\User;
 
 class KhoaHocController extends Controller
 {
     public function __construct(private KhoahocRepository $khoahoc)
     {
-        $this->middleware('auth');
-        $this->middleware('permission:khoahoc.manage');
+//        $this->middleware('auth');
+
     }
 
     /**
@@ -28,6 +29,7 @@ class KhoaHocController extends Controller
      */
     public function index(Request $request)
     {
+        $this->middleware('permission:khoahoc.manage');
         $khoahocs = QueryBuilder::for(KhoaHoc::class)
             ->defaultSort('id')
             ->paginate($request->per_page ?: 20);
@@ -41,6 +43,7 @@ class KhoaHocController extends Controller
      */
     public function show($id)
     {
+        $this->middleware('permission:khoahoc.manage');
         $khoahoc = QueryBuilder::for(KhoaHoc::where('id', $id))
             ->firstOrFail();
         return new KhoahocResource($khoahoc);
@@ -48,6 +51,7 @@ class KhoaHocController extends Controller
 
     public function updateOrCreate(Request $request)
     {
+        $this->middleware('permission:khoahoc.manage');
         $data = collect($request->all());
         $data = $data->only([
             'khoahoc_name', 'cate_id', 'status', 'stt'
@@ -70,8 +74,18 @@ class KhoaHocController extends Controller
 
     public function getbycategogory($id,Request $request)
     {
+        $this->middleware('permission:khoahoc.manage');
         $khoahocs = QueryBuilder::for(KhoaHoc::where('cate_id', $id))
             ->paginate($request->per_page ?: 20);
         return KhoahocResource::collection($khoahocs);
+    }
+
+    public function khoahocByUser($userName, Request $request){
+
+        $khoahocs = QueryBuilder::for(KhoaHoc::class)
+            ->defaultSort('id')
+            ->paginate($request->per_page ?: 20);
+        $khoahocResource = KhoahocResource::collection($khoahocs);
+        return response()->json($khoahocResource);
     }
 }

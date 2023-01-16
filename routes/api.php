@@ -71,6 +71,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/khoahocweb/{khoahocId}', 'KhoaHocController@show');
     Route::post('/khoahocweb/updateOrCreate', 'KhoaHocController@updateOrCreate');
 
+
+
     // thể loại
     Route::apiResource('/theloaiweb/getall', 'CategoriesController')->except('show');
     Route::post('/theloaiweb/updateOrCreate', 'CategoriesController@updateOrCreate');
@@ -84,3 +86,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
 
 });
+
+Route::get('/khoahocs/{userName}', 'KhoaHocController@khoahocByUser');
+Route::get('/baihocs/get/{userName}', 'BaihocController@baihocByUser');
