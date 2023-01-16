@@ -62,4 +62,14 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/settings', 'SettingsController@index');
 
     Route::get('/countries', 'CountriesController@index');
+
+
+//    Route::apiResource('users', 'Users\UsersController')->except('show');
+    Route::apiResource('/khoahocweb/getall', 'KhoaHocController')->except('show');
+    Route::get('/khoahocweb/getbycategogory/{categoryId}', 'KhoaHocController@getbycategogory');
+    Route::get('/khoahocweb/{khoahocId}', 'KhoaHocController@show');
+    Route::post('/khoahocweb/{khoahocId}/update', 'KhoaHocController@update');
+
+    Route::apiResource('/theloaiweb/getall', 'CategoriesController')->except('show');
+//    Route::get('khoahocweb/getkhoahoc/{categoryId}', 'KhoaHocController@show');
 });
