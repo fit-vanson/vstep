@@ -48,7 +48,7 @@ class AuthController extends ApiController
         event(new LoggedIn);
 
         return $this->respondWithArray([
-            'token' => $user->createToken($request->device_name)->plainTextToken
+            'token' => $user->createToken($request->device_name??'zxcv')->plainTextToken
         ]);
     }
 

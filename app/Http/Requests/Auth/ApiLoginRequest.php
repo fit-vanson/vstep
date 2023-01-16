@@ -12,7 +12,7 @@ class ApiLoginRequest extends LoginRequest
     public function rules()
     {
         return array_merge(parent::rules(), [
-            'device_name' => 'required',
+//            'device_name' => 'required',
         ]);
     }
 
