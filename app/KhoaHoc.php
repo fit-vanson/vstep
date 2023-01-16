@@ -11,7 +11,10 @@ class KhoaHoc extends Model
     use HasFactory;
 
     protected $keyType = 'string';
-    protected $fillable = ['khoahoc_name', 'cate_id', 'status', 'stt'];
+//    protected $fillable = ['khoahoc_name', 'cate_id', 'status', 'stt'];
+//    protected $fillable = ['khoahoc_name'];
+
+    protected $guarded= [];
     protected $casts = [
         'id' => 'string',
     ];

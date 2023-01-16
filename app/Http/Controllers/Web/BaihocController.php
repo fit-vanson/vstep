@@ -17,10 +17,7 @@ class BaihocController extends Controller
     {
         // Allow access to authenticated users only.
         $this->middleware('auth');
-//        $this->middleware('permission:baihoc.manage');
         $this->middleware('permission:baihoc.manage', ['only' => ['create', 'edit', 'destroy']]);
-
-
     }
 
     /**

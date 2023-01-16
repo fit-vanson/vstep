@@ -19,10 +19,7 @@ class KhoaHocController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('permission:khoahoc.manage');
-
     }
-
-
 
     /**
      * Paginate all Khoá học .
@@ -49,11 +46,25 @@ class KhoaHocController extends Controller
         return new KhoahocResource($khoahoc);
     }
 
-    public function update(KhoaHoc $khoahoc, UpdateKhoahocRequest $request)
+    public function updateOrCreate(Request $request)
     {
-        dd($request->all(),$id);
-        $khoahoc = QueryBuilder::for(KhoaHoc::where('id', $id))
-            ->firstOrFail();
+        $data = collect($request->all());
+        $data = $data->only([
+            'khoahoc_name', 'cate_id', 'status', 'stt'
+        ])->toArray();
+        if (isset($data['cate_id'])) {
+            $category = QueryBuilder::for(Categories::where('id', $data['cate_id']))
+                ->first();
+            if(!$category) {
+                return response()->json(['error'=> true,'msg'=> 'fail id cate']);
+            }
+        }
+         $khoahoc = KhoaHoc::UpdateOrCreate(
+             [
+                 'id' => $request->id
+             ],
+             $data
+         );
         return new KhoahocResource($khoahoc);
     }
 

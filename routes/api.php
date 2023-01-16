@@ -64,12 +64,23 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/countries', 'CountriesController@index');
 
 
-//    Route::apiResource('users', 'Users\UsersController')->except('show');
+
+    // khoá học
     Route::apiResource('/khoahocweb/getall', 'KhoaHocController')->except('show');
     Route::get('/khoahocweb/getbycategogory/{categoryId}', 'KhoaHocController@getbycategogory');
     Route::get('/khoahocweb/{khoahocId}', 'KhoaHocController@show');
-    Route::post('/khoahocweb/{khoahocId}/update', 'KhoaHocController@update');
+    Route::post('/khoahocweb/updateOrCreate', 'KhoaHocController@updateOrCreate');
 
+    // thể loại
     Route::apiResource('/theloaiweb/getall', 'CategoriesController')->except('show');
-//    Route::get('khoahocweb/getkhoahoc/{categoryId}', 'KhoaHocController@show');
+    Route::post('/theloaiweb/updateOrCreate', 'CategoriesController@updateOrCreate');
+    Route::post('/theloaiweb/{theloaiId}/delete', 'CategoriesController@destroy');
+
+    // Bài học
+
+    Route::get('/baihocweb/getbykhoahoc/{khoahocId}', 'BaihocController@getbykhoahoc');
+    Route::post('/baihocweb/{baihocId}/getzipfile', 'BaihocController@getzipfile');
+    Route::post('/baihocweb/updateOrCreate', 'BaihocController@updateOrCreate');
+
+
 });

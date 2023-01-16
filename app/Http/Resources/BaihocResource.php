@@ -4,7 +4,7 @@ namespace Vanguard\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryResource extends JsonResource
+class BaihocResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,7 +16,12 @@ class CategoryResource extends JsonResource
     {
         return [
             'Id' => $this->id,
-            'TenLoai' => $this->cate_name,
+            'TenBaiHoc' => $this->baihoc_name,
+            'IdKhoaHoc' => $this->khoahoc_id,
+            'STT' => $this->baihoc_stt,
+            'Link1' => $this->baihoc_link_1,
+            'Link2' => $this->baihoc_link_2,
+            'file' => $this->baihoc_file,
         ];
     }
 }

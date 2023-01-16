@@ -57,7 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => env('ADMIN_DIR','admin')], function () {
     Route::group(['middleware' => ['auth', 'verified']], function () {
 
         /**
