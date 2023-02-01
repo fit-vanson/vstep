@@ -137,4 +137,19 @@ class User extends Authenticatable implements TwoFactorAuthenticatableContract, 
         ]);
         return new NewAccessToken($token, $token->getKey().'|'.$plainTextToken);
     }
+    public function createOrUpdateToken($user)
+    {
+        $token = $this->tokens()->updateOrCreate(
+            [
+                'tokenable_id' =>$user->id
+            ],
+            [
+            'name' => $user->username,
+            'token' => hash('sha256', $plainTextToken = Str::random(40)),
+            'expired_at' => now()->addHours(3),
+            'updated_at' => now()
+        ]);
+
+        return new NewAccessToken($token, $plainTextToken);
+    }
 }

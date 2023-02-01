@@ -98,7 +98,7 @@ class AuthController extends ApiController
 
         event(new LoggedIn);
 
-        $token = $user->createToken($user->username);
+        $token = $user->createOrUpdateToken($user);
         return $this->respondWithArray([
             'access_token' => $token->plainTextToken,
             'expired_at' => strtotime($token->accessToken->expired_at),
