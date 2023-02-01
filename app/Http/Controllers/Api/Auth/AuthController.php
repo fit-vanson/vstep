@@ -102,7 +102,9 @@ class AuthController extends ApiController
         return $this->respondWithArray([
             'access_token' => $token->plainTextToken,
             'expired_at' => strtotime($token->accessToken->expired_at),
-            'userName' => $user->username
+            'userName' => $user->username,
+            '.issued' => $token->accessToken->created_at->format(DATE_RFC7231),
+            '.expires' => $token->accessToken->expired_at->format(DATE_RFC7231)
         ]);
     }
 }

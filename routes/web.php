@@ -5,6 +5,8 @@
  * clear
  */
 
+use Illuminate\Support\Facades\Http;
+
 Route::get('/clear', function () {
     try {
         echo Artisan::call('optimize:clear');
@@ -244,3 +246,22 @@ Route::group(['prefix' => 'install'], function () {
     Route::get('complete', 'InstallController@complete')->name('install.complete');
     Route::get('error', 'InstallController@error')->name('install.error');
 });
+
+
+Route::group(['prefix' => 'checkapi'], function () {
+    Route::get('/token', function (){
+
+        $domain = 'https://vstep.vietmmo.net/api/Token';
+        $dataArr = array(
+            'grant_type' => 'password',
+            'username' => 'admin',
+            'password' => 'admin@123',
+        );
+        $response = Http::withHeaders([
+            'Content-Type: application/json',
+        ])->post($domain, $dataArr);
+        return ($response->json());
+    });
+
+});
+

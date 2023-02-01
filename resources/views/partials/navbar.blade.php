@@ -1,7 +1,7 @@
 <nav class="navbar fixed-top align-items-start navbar-expand-lg pl-0 pr-0 py-0">
 
     <div class="navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand mr-0" href="{{ url('/') }}">
+        <a class="navbar-brand mr-0" href="{{ url('/'.env('ADMIN_DIR')) }}">
             <img src="{{ url('assets/img/vanguard-logo.png') }}" class="logo-lg" height="35"
                  alt="{{ setting('app_name') }}">
             <img src="{{ url('assets/img/vanguard-logo-no-text.png') }}" class="logo-sm" height="35"
@@ -40,7 +40,7 @@
 
                 <ol class="breadcrumb mb-0 font-weight-light">
                     <li class="breadcrumb-item">
-                        <a href="{{ url('/') }}" class="text-muted">
+                        <a href="{{ url('/'.env('ADMIN_DIR')) }}" class="text-muted">
                             <i class="fa fa-home"></i>
                         </a>
                     </li>
