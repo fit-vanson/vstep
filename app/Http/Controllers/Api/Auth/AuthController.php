@@ -35,7 +35,7 @@ class AuthController extends ApiController
      * @throws BindingResolutionException
      * @throws ValidationException
      */
-    public function token(ApiLoginRequest $request)
+    public function login(ApiLoginRequest $request)
     {
         $user = $this->findUser($request);
 
@@ -84,5 +84,25 @@ class AuthController extends ApiController
         auth()->user()->currentAccessToken()->delete();
 
         return $this->respondWithSuccess();
+    }
+
+    public function token(ApiLoginRequest $request)
+    {
+        $user = $this->findUser($request);
+
+        if ($user->isBanned()) {
+            return $this->errorUnauthorized(__('Your account is banned by administrators.'));
+        }
+
+        Auth::setUser($user);
+
+        event(new LoggedIn);
+
+        $token = $user->createToken($user->username);
+        return $this->respondWithArray([
+            'access_token' => $token->plainTextToken,
+            'expired_at' => strtotime($token->accessToken->expired_at),
+            'userName' => $user->username
+        ]);
     }
 }

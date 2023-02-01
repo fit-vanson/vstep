@@ -3,6 +3,8 @@
 namespace Vanguard\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Laravel\Sanctum\Sanctum;
+use Vanguard\PersonalAccessToken;
 use Vanguard\User;
 
 class AuthServiceProvider extends ServiceProvider
@@ -46,5 +48,13 @@ class AuthServiceProvider extends ServiceProvider
 
             return (int)$user->id === (int)$session->user_id;
         });
+
+        Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
+
+        Sanctum::authenticateAccessTokensUsing(
+            static function (PersonalAccessToken $accessToken, bool $is_valid) {
+                return $accessToken->expired_at ? $is_valid && !$accessToken->expired_at->isPast() : $is_valid;
+            }
+        );
     }
 }

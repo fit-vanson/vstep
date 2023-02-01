@@ -1,6 +1,6 @@
 <?php
 
-Route::post('login', 'Auth\AuthController@token');
+Route::post('login', 'Auth\AuthController@login');
 Route::post('login/social', 'Auth\SocialLoginController@index');
 Route::post('logout', 'Auth\AuthController@logout');
 
@@ -87,5 +87,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
 });
 
+Route::post('Token', 'Auth\AuthController@Token');
+Route::post('Account/ChangePassword', 'Auth\AuthController@Token');
+
 Route::get('/khoahocs/{userName}', 'KhoaHocController@khoahocByUser');
 Route::get('/baihocs/get/{userName}', 'BaihocController@baihocByUser');
+
+Route::get('/baihocs/getzipfile/{idBaihoc}', 'BaihocController@baihocByUser');

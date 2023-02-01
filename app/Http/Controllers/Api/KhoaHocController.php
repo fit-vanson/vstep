@@ -18,7 +18,7 @@ class KhoaHocController extends Controller
 {
     public function __construct(private KhoahocRepository $khoahoc)
     {
-//        $this->middleware('auth');
+        $this->middleware('auth');
 
     }
 

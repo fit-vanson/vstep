@@ -18,12 +18,12 @@ class BaihocController extends Controller
     public function __construct(private BaihocRepository $baihoc)
     {
         // Allow access to authenticated users only.
+        $this->middleware('auth');
 
     }
 
     public function getbykhoahoc($id,Request $request)
     {
-        $this->middleware('auth');
         $this->middleware('permission:baihoc.manage', ['only' => ['create', 'edit', 'destroy']]);
         $baihocs = QueryBuilder::for(Baihoc::where('khoahoc_id', $id))
             ->paginate($request->per_page ?: 20);
@@ -67,7 +67,7 @@ class BaihocController extends Controller
 
     public function updateOrCreate(Request $request)
     {
-        $this->middleware('auth');
+
         $this->middleware('permission:baihoc.manage', ['only' => ['create', 'edit', 'destroy']]);
         $data = collect($request->all());
 
