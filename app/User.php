@@ -137,7 +137,7 @@ class User extends Authenticatable implements TwoFactorAuthenticatableContract, 
         ]);
         return new NewAccessToken($token, $token->getKey().'|'.$plainTextToken);
     }
-    public function createOrUpdateToken($user)
+    public function createOrUpdateToken($user, array $abilities = ['*'])
     {
         $token = $this->tokens()->updateOrCreate(
             [
@@ -146,6 +146,7 @@ class User extends Authenticatable implements TwoFactorAuthenticatableContract, 
             [
             'name' => $user->username,
             'token' => hash('sha256', $plainTextToken = Str::random(40)),
+            'abilities' => $abilities,
             'expired_at' => now()->addHours(3),
             'updated_at' => now()
         ]);
