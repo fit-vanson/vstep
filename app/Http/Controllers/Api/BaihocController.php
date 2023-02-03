@@ -105,6 +105,7 @@ class BaihocController extends Controller
 
     public function getzipfileIdBaihoc($id,Request $request)
     {
+//        $this->middleware('auth');
         $baihoc = QueryBuilder::for(Baihoc::where('id', $id))
             ->firstOrFail();
         if($baihoc->baihoc_file){
