@@ -40,33 +40,49 @@ class AuthDetailsController extends ApiController
         $user =  User::where('username',$data['Username'])->first();
 
         if($user){
-            if (Hash::check($data['OldPassword'], $user->password)) {
-                if($data['NewPassword'] == $data['ConfirmPassword']){
-                    $user->update([
-                        'password' => $data['NewPassword']
-                    ]);
+            if(\Auth::user()->username != $user->username ){
+                if(!\Auth::user()->hasPermission('users.manage')){
                     return response()->json([
-                        'msg' =>'Đổi mật khẩu thành công!'
+                        'msg' => $data['Username'].' không có quyền!'
                     ]);
                 }else{
-                    return response()->json([
-                        'msg' =>'Mật khẩu không khớp!'
-                    ]);
+                    return $this->extracted($data, $user);
                 }
-            } else {
-                return response()->json([
-                    'msg' =>'Mật khẩu không khớp với mật khẩu xác nhận'
-                ]);
+            }else{
+                return $this->extracted($data, $user);
             }
+
         }else{
             return response()->json([
                 'msg' => $data['Username'].' không tồn tại!'
             ]);
         }
+    }
 
-
-
-
-
+    /**
+     * @param array $data
+     * @param $user
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function extracted(array $data, $user): \Illuminate\Http\JsonResponse
+    {
+        if (Hash::check($data['OldPassword'], $user->password)) {
+            if ($data['NewPassword'] == $data['ConfirmPassword']) {
+                $user->update([
+                    'password' => $data['NewPassword']
+                ]);
+                return response()->json([
+                    'msg' => 'Đổi mật khẩu thành công!'
+                ]);
+            } else {
+                return response()->json([
+                    'msg' => 'Mật khẩu không khớp!'
+                ]);
+            }
+        } else {
+            return response()->json([
+                'msg' => 'Mật khẩu không khớp với mật khẩu cũ!'
+            ]);
+        }
     }
 }
