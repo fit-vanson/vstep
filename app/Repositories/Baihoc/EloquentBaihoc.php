@@ -71,14 +71,6 @@ class EloquentBaihoc implements BaihocRepository
      */
     public function create(array $data)
     {
-        if (isset($data['baihoc_file'])) {
-            $path_file = $this->getDestinationDirectory();
-            $file = $data['baihoc_file'];
-            $extension = $file->getClientOriginalExtension();
-            $file_name = uniqid(Str::slug($data['baihoc_name'], '_') . '_') . '.' . $extension;
-            $data['baihoc_file'] = $file_name;
-            $file->move($path_file, $file_name);
-        }
         $baihoc = Baihoc::create($data);
         event(new Created($baihoc));
         return $baihoc;
@@ -100,12 +92,8 @@ class EloquentBaihoc implements BaihocRepository
                     Log::error('Message: Detele file ' . $exception->getMessage() . '--' . $exception->getLine());
                 }
             }
-            $file = $data['baihoc_file'];
-            $extension = $file->getClientOriginalExtension();
-            $file_name = uniqid(Str::slug($data['baihoc_name'], '_') . '_') . '.' . $extension;
-            $data['baihoc_file'] = $file_name;
-            $file->move($path_file, $file_name);
         }
+
         $baihoc->update($data);
         event(new Updated($baihoc));
 
@@ -158,6 +146,10 @@ class EloquentBaihoc implements BaihocRepository
     private function getDestinationDirectory()
     {
         return public_path('/upload/files');
+    }
+
+    public function uploadFiles($request){
+
     }
 
 }

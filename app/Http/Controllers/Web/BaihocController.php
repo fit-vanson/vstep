@@ -4,6 +4,10 @@ namespace Vanguard\Http\Controllers\Web;
 
 use Cache;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
+use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
+use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 use Vanguard\Baihoc;
 use Vanguard\Http\Controllers\Controller;
 use Vanguard\Http\Requests\Baihoc\CreateBaihocRequest;
@@ -127,5 +131,36 @@ class BaihocController extends Controller
         return redirect()->route('baihoc.index')
             ->withSuccess(__('Xoá thành công.'));
 
+    }
+
+    public function uploadfile(Request $request){
+        $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
+        if (!$receiver->isUploaded()) {
+            throw new UploadMissingFileException();
+        }
+
+        $fileReceived = $receiver->receive(); // receive file
+        if ($fileReceived->isFinished()) { // file uploading is complete / all chunks are uploaded
+            $file = $fileReceived->getFile(); // get file
+            $extension = $file->getClientOriginalExtension();
+            $fileName = md5(time()) . '.' . $extension; // a unique file name
+
+            $disk = Storage::disk('upload');
+            $path = $disk->putFileAs('files', $file, $fileName);
+
+            // delete chunked file
+            unlink($file->getPathname());
+            return [
+                'path' => asset('upload/' . $path),
+                'filename' => $fileName
+            ];
+        }
+
+        // otherwise return percentage information
+        $handler = $fileReceived->handler();
+        return [
+            'done' => $handler->getPercentageDone(),
+            'status' => true
+        ];
     }
 }

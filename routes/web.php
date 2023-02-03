@@ -176,6 +176,7 @@ Route::group(['prefix' => env('ADMIN_DIR','admin')], function () {
         Route::resource('baihoc', 'BaihocController')
 //        ->except('show')->middleware('permission:baihoc.manage');
             ->except('show');
+        Route::post('baihoc/upload-file','BaihocController@uploadfile')->name('baihoc.uploadfile');
 
         /**
          * Settings

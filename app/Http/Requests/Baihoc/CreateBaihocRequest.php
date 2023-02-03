@@ -16,7 +16,8 @@ class CreateBaihocRequest extends Request
 
         return [
 //            'cate_name' => 'required|regex:/^[a-zA-Z0-9\-_\.]+$/|unique:categories,cate_name'
-            'baihoc_name' => 'required|unique:baihocs,baihoc_name'
+            'baihoc_name' => 'required|unique:baihocs,baihoc_name',
+//            'baihoc_file' => 'mimes:zip'
         ];
     }
 }
