@@ -88,7 +88,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 });
 
 Route::post('Token', 'Auth\AuthController@Token');
-Route::post('Account/ChangePassword', 'Profile\AuthDetailsController@ChangePassword');
+Route::post('Account/ChangePassword', 'Profile\AuthDetailsController@ChangePassword')->middleware('auth');
 //Route::patch('me/details/auth', 'Profile\AuthDetailsController@update');
 
 

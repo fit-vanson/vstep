@@ -36,7 +36,6 @@ class AuthDetailsController extends ApiController
 
     public function ChangePassword(Request $request)
     {
-
         $data = $request->only(['OldPassword', 'NewPassword', 'ConfirmPassword','Username']);
         $user =  User::where('username',$data['Username'])->first();
 
