@@ -88,7 +88,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 });
 
 Route::post('Token', 'Auth\AuthController@Token');
-Route::post('Account/ChangePassword', 'Auth\AuthController@ChangePassword');
+Route::post('Account/ChangePassword', 'Profile\AuthDetailsController@ChangePassword');
+//Route::patch('me/details/auth', 'Profile\AuthDetailsController@update');
+
 
 Route::get('/khoahocs/{userName}', 'KhoaHocController@khoahocByUser');
 

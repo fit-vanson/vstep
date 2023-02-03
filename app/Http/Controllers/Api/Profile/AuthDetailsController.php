@@ -2,10 +2,13 @@
 
 namespace Vanguard\Http\Controllers\Api\Profile;
 
+use Illuminate\Support\Facades\Hash;
 use Vanguard\Http\Controllers\Api\ApiController;
 use Vanguard\Http\Requests\User\UpdateProfileLoginDetailsRequest;
 use Vanguard\Http\Resources\UserResource;
 use Vanguard\Repositories\User\UserRepository;
+use Illuminate\Http\Request;
+use Vanguard\User;
 
 /**
  * @package Vanguard\Http\Controllers\Api\Profile
@@ -24,6 +27,37 @@ class AuthDetailsController extends ApiController
         $user = $request->user();
 
         $data = $request->only(['email', 'username', 'password']);
+
+        $user = $users->update($user->id, $data);
+
+        return new UserResource($user);
+    }
+
+
+    public function ChangePassword(Request $request)
+    {
+
+        $data = $request->only(['OldPassword', 'NewPassword', 'ConfirmPassword','Username']);
+        $user =  User::where('username',$data['Username'])->firstOrFail();
+
+        if (Hash::check($data['OldPassword'], $user->password)) {
+            if($data['NewPassword'] == $data['ConfirmPassword']){
+                $user->update([
+                    'password' => Hash::make($data['NewPassword'])
+                ]);
+                return response()->json([
+                    'msg' =>'Đổi mật khẩu thành công!'
+                ]);
+            }else{
+                return response()->json([
+                    'msg' =>'Mật khẩu không khớp!'
+                ]);
+            }
+        } else {
+            return response()->json([
+                'msg' =>'Mật khẩu không khớp với mật khẩu xác nhận'
+            ]);
+        }
 
         $user = $users->update($user->id, $data);
 

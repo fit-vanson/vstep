@@ -264,5 +264,20 @@ Route::group(['prefix' => 'checkapi'], function () {
         return ($response->json());
     });
 
+    Route::get('/ChangePassword', function (){
+
+        $domain = 'https://vstep.vietmmo.net/api/Token';
+        $domain = 'http://127.0.0.1:8000/api/Account/ChangePassword';
+        $dataArr = array(
+            'grant_type' => 'password',
+            'username' => 'admin',
+            'password' => 'admin@123',
+        );
+        $response = Http::withHeaders([
+            'Content-Type: application/json',
+        ])->post($domain, $dataArr);
+        return ($response->json());
+    });
+
 });
 
