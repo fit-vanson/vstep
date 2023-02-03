@@ -129,13 +129,10 @@
 
     <script type="text/javascript">
         let browseFile = $('#upload_file');
-        let baihocFile =  $('#baihoc_file').val();
-
         let resumable = new Resumable({
             target: '{{ route('baihoc.uploadfile') }}',
             query:{
                 _token:'{{ csrf_token() }}',
-                _baihocFile: baihocFile,
             } ,// CSRF token
             fileType: ['zip'],
             chunkSize: 10*1024*1024, // default is 1*1024*1024, this should be less than your maximum limit in php.ini
@@ -160,11 +157,10 @@
 
         resumable.on('fileSuccess', function (file, response) { // trigger when file upload complete
             response = JSON.parse(response)
-            console.log(response)
+
             hideProgress()
             $('#upload_success').show();
             $('#baihoc_file').val(response.filename);
-            console.log('value: '+$('#baihoc_file').val())
             // $('#upload_file').hide();
             $('#start-upload-btn').prop('disabled', false);
         });
