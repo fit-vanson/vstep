@@ -100,8 +100,6 @@ class BaihocController extends Controller
         return response()->json($baihocsResource);
     }
 
-
-
     public function getzipfileIdBaihoc($id,Request $request)
     {
         $this->middleware('auth');
