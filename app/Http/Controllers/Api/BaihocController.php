@@ -4,6 +4,7 @@ namespace Vanguard\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
 use Spatie\QueryBuilder\QueryBuilder;
 use Vanguard\Baihoc;
@@ -107,7 +108,8 @@ class BaihocController extends Controller
         $baihoc = QueryBuilder::for(Baihoc::where('id', $id))
             ->firstOrFail();
         if($baihoc->baihoc_file){
-            return asset('upload/files/'.$baihoc->baihoc_file);
+            $file = public_path('/upload/files/'.$baihoc->baihoc_file);
+            return Response::download($file);
         }else{
             return false;
         }

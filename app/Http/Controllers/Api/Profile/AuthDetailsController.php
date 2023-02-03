@@ -43,7 +43,7 @@ class AuthDetailsController extends ApiController
         if (Hash::check($data['OldPassword'], $user->password)) {
             if($data['NewPassword'] == $data['ConfirmPassword']){
                 $user->update([
-                    'password' => Hash::make($data['NewPassword'])
+                    'password' => $data['NewPassword']
                 ]);
                 return response()->json([
                     'msg' =>'Đổi mật khẩu thành công!'
