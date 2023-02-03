@@ -100,4 +100,15 @@ class BaihocController extends Controller
         return response()->json($baihocsResource);
     }
 
+
+
+    public function getzipfileIdBaihoc($id,Request $request)
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:baihoc.manage', ['only' => ['create', 'edit', 'destroy']]);
+        $baihoc = QueryBuilder::for(Baihoc::where('id', $id))
+            ->firstOrFail();
+        return asset('upload/files/'.$baihoc->baihoc_file);
+    }
+
 }

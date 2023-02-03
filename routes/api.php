@@ -93,4 +93,4 @@ Route::post('Account/ChangePassword', 'Auth\AuthController@ChangePassword');
 Route::get('/khoahocs/{userName}', 'KhoaHocController@khoahocByUser');
 
 Route::get('/baihocs/get/{userName}', 'BaihocController@baihocByUser');
-Route::get('/baihocs/getzipfile/{idBaihoc}', 'BaihocController@getzipfile');
+Route::get('/baihocs/getzipfile/{idBaihoc}', 'BaihocController@getzipfileIdBaihoc');
