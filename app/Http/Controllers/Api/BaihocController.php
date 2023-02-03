@@ -106,7 +106,12 @@ class BaihocController extends Controller
         $this->middleware('permission:baihoc.manage', ['only' => ['create', 'edit', 'destroy']]);
         $baihoc = QueryBuilder::for(Baihoc::where('id', $id))
             ->firstOrFail();
-        return asset('upload/files/'.$baihoc->baihoc_file);
+        if($baihoc->baihoc_file){
+            return asset('upload/files/'.$baihoc->baihoc_file);
+        }else{
+            return false;
+        }
+
     }
 
 }
