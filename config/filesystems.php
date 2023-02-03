@@ -70,7 +70,6 @@ return [
             'url' => env('APP_URL') . '/upload',
             'visibility' => 'public',
         ],
-
     ],
 
 ];

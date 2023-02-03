@@ -157,7 +157,6 @@
 
         resumable.on('fileSuccess', function (file, response) { // trigger when file upload complete
             response = JSON.parse(response)
-
             hideProgress()
             $('#upload_success').show();
             $('#baihoc_file').val(response.filename);
