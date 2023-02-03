@@ -38,29 +38,36 @@ class AuthDetailsController extends ApiController
     {
 
         $data = $request->only(['OldPassword', 'NewPassword', 'ConfirmPassword','Username']);
-        $user =  User::where('username',$data['Username'])->firstOrFail();
+        $user =  User::where('username',$data['Username'])->first();
 
-        if (Hash::check($data['OldPassword'], $user->password)) {
-            if($data['NewPassword'] == $data['ConfirmPassword']){
-                $user->update([
-                    'password' => $data['NewPassword']
-                ]);
+        if($user){
+            if (Hash::check($data['OldPassword'], $user->password)) {
+                if($data['NewPassword'] == $data['ConfirmPassword']){
+                    $user->update([
+                        'password' => $data['NewPassword']
+                    ]);
+                    return response()->json([
+                        'msg' =>'Đổi mật khẩu thành công!'
+                    ]);
+                }else{
+                    return response()->json([
+                        'msg' =>'Mật khẩu không khớp!'
+                    ]);
+                }
+            } else {
                 return response()->json([
-                    'msg' =>'Đổi mật khẩu thành công!'
-                ]);
-            }else{
-                return response()->json([
-                    'msg' =>'Mật khẩu không khớp!'
+                    'msg' =>'Mật khẩu không khớp với mật khẩu xác nhận'
                 ]);
             }
-        } else {
+        }else{
             return response()->json([
-                'msg' =>'Mật khẩu không khớp với mật khẩu xác nhận'
+                'msg' => $data['Username'].' không tồn tại!'
             ]);
         }
 
-        $user = $users->update($user->id, $data);
 
-        return new UserResource($user);
+
+
+
     }
 }
