@@ -111,7 +111,7 @@
                                id="baihoc_pass_zip"
                                name="baihoc_pass_zip"
                                placeholder="@lang('Pass Zip')"
-                               value="{{ $edit ? $baihoc->baihoc_pass_zip : old('baihoc_pass_zip') }}">
+                               value="{{ $edit ? str_decrypt($baihoc->baihoc_pass_zip) : old('baihoc_pass_zip') }}">
                     </div>
                 </div>
             </div>
