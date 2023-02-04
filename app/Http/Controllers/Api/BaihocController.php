@@ -55,7 +55,7 @@ class BaihocController extends Controller
                 $file_name = md5(time()) . '.' . $extension; // a unique file name
                 $baihoc->update([
                     'baihoc_file'=>$file_name,
-                    'baihoc_pass_zip' => $this->str_encrypt($data['baihoc_pass_zip'])
+//                    'baihoc_pass_zip' => $this->str_encrypt($data['baihoc_pass_zip'])
                 ]);
                 $file->move($path_file, $file_name);
             }else{

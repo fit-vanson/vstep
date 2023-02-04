@@ -145,11 +145,11 @@ class BaihocController extends Controller
             $extension = $file->getClientOriginalExtension();
             $fileName = md5(time()) . '.' . $extension; // a unique file name
 
-//            $disk = Storage::disk('upload');
-//            $path = $disk->putFileAs('files', $file, $fileName);
-
-            $disk = Storage::disk(config('filesystems.default'));
+            $disk = Storage::disk('upload');
             $path = $disk->putFileAs('files', $file, $fileName);
+
+//            $disk = Storage::disk(config('filesystems.default'));
+//            $path = $disk->putFileAs('files', $file, $fileName);
 
             // delete chunked file
             unlink($file->getPathname());
