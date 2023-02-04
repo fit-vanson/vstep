@@ -85,7 +85,7 @@ class EloquentBaihoc implements BaihocRepository
     public function update($id, array $data)
     {
         $baihoc = $this->find($id);
-        if (isset($data['baihoc_file'])) {
+        if (isset($data['baihoc_file'])|| isset($data['baihoc_pass_zip'])) {
             $path_file = $this->getDestinationDirectory();
             if ($baihoc->baihoc_file) {
                 $fileDelete = $path_file . '/' . $baihoc->baihoc_file;
