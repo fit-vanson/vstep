@@ -87,7 +87,7 @@
 
                     <div class="form-group">
                         <label for="name">@lang('Tải tập tin bài học định dạng .zip')</label>
-                        <input type="hidden" id="baihoc_file" name="baihoc_file" value="{{ old('baihoc_file') }}">
+                        <input type="hidden" id="baihoc_file" name="baihoc_file" value="{{ $edit ? $baihoc->baihoc_file : old('baihoc_file') }}">
                         <input type="file"
                                class="form-control input-solid"
                                id="upload_file"
