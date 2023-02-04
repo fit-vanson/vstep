@@ -168,10 +168,12 @@ class BaihocController extends Controller
 
     public function deleteFileExist(){
 
-        $do_not_delete =[];
+        $do_not_delete = [];
+        $string = '<br>';
         $files = Baihoc::all();
         foreach ($files as $file){
             $do_not_delete[] = $file->baihoc_file;
+            $string .= '<b>'.$file->baihoc_name.'</b> - '.$file->baihoc_file.'<br>';
         }
 
         $directory = public_path('upload/files/');
@@ -188,6 +190,6 @@ class BaihocController extends Controller
                 }
             }
         }
-        return json_encode($do_not_delete);
+        return html_entity_decode($string);
     }
 }
