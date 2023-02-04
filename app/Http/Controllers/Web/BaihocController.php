@@ -20,8 +20,8 @@ class BaihocController extends Controller
     public function __construct(private BaihocRepository $baihoc)
     {
         // Allow access to authenticated users only.
-        $this->middleware('auth');
-        $this->middleware('permission:baihoc.manage', ['only' => ['create', 'edit', 'destroy']]);
+        $this->middleware('auth')->except('uploadfile');
+        $this->middleware('permission:baihoc.manage', ['only' => ['create', 'edit', 'destroy']])->except('uploadfile');
     }
 
     /**
