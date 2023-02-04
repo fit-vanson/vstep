@@ -4,6 +4,7 @@ namespace Vanguard\Repositories\Baihoc;
 
 
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Vanguard\Baihoc;
 use Vanguard\Events\Baihoc\Created;
@@ -72,6 +73,15 @@ class EloquentBaihoc implements BaihocRepository
     public function create(array $data)
     {
         if (isset($data['baihoc_file']) || isset($data['baihoc_pass_zip'])) {
+
+//            $storage_path = storage_path('app/files/');
+//            $storage_file = $storage_path.$data['baihoc_file'];
+//
+//            $upload_path = public_path('upload/files/');
+//            $upload_file = $upload_path.$data['baihoc_file'];
+//
+//            \File::copy($storage_file,$upload_file);
+//            unlink($storage_file);
             $data['baihoc_pass_zip'] = str_encrypt($data['baihoc_pass_zip']);
         }
         $baihoc = Baihoc::create($data);
@@ -86,15 +96,26 @@ class EloquentBaihoc implements BaihocRepository
     {
         $baihoc = $this->find($id);
         if (isset($data['baihoc_file'])|| isset($data['baihoc_pass_zip'])) {
-            $path_file = $this->getDestinationDirectory();
+
+//            $storage_path = storage_path('app/files/');
+//            $storage_file = $storage_path.$data['baihoc_file'];
+//
+            $upload_path = public_path('upload/files/');
+//            $upload_file = $upload_path.$data['baihoc_file'];
+//
+//            \File::copy($storage_file,$upload_file);
+//
+//            unlink($storage_file);
+
             if ($baihoc->baihoc_file) {
-                $fileDelete = $path_file . '/' . $baihoc->baihoc_file;
+                $fileDelete = $upload_path . '/' . $baihoc->baihoc_file;
                 try {
                     unlink($fileDelete);
                 } catch (\Exception $exception) {
                     Log::error('Message: Detele file ' . $exception->getMessage() . '--' . $exception->getLine());
                 }
             }
+
             $data['baihoc_pass_zip'] = str_encrypt($data['baihoc_pass_zip']);
         }
 
@@ -142,15 +163,6 @@ class EloquentBaihoc implements BaihocRepository
         return Baihoc::where('name', $name)->first();
     }
 
-    /**
-     * Get destination directory where file should be uploaded.
-     *
-     * @return string
-     */
-    private function getDestinationDirectory()
-    {
-        return public_path('/upload/files');
-    }
 
 
 }
