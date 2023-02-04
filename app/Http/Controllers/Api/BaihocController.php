@@ -19,7 +19,7 @@ class BaihocController extends Controller
     public function __construct(private BaihocRepository $baihoc)
     {
         // Allow access to authenticated users only.
-        $this->middleware('auth');
+        $this->middleware('auth')->except('getzipfileIdBaihoc');
 
     }
 
