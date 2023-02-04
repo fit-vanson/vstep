@@ -48,7 +48,7 @@
         "vanguardapp/announcements": "^4.0",
         "vanguardapp/plugins": "^4.0",
         "webpatser/laravel-countries": "dev-master",
-      "ext-openssl": "*"
+        "ext-openssl": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
