@@ -146,7 +146,6 @@ class BaihocController extends Controller
 
             $disk = Storage::disk('upload');
             $path = $disk->putFileAs('files', $file, $fileName);
-
             // delete chunked file
             unlink($file->getPathname());
             return [
@@ -154,7 +153,6 @@ class BaihocController extends Controller
                 'filename' => $fileName
             ];
         }
-
         // otherwise return percentage information
         $handler = $fileReceived->handler();
         return [
