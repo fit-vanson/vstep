@@ -87,7 +87,7 @@
 
                     <div class="form-group">
                         <label for="name">@lang('Tải tập tin bài học định dạng .zip')</label>
-                        <input type="text" id="baihoc_file" name="baihoc_file" style="display: none">
+                        <input type="hidden" id="baihoc_file" name="baihoc_file" value="{{ old('baihoc_file') }}">
                         <input type="file"
                                class="form-control input-solid"
                                id="upload_file"
@@ -102,7 +102,16 @@
                         <div style="display: none;height: 15px" class="progress mt-3" >
                             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%; height: 100%">75%</div>
                         </div>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="name">@lang('Pass Zip')</label>
+                        <input type="text"
+                               class="form-control input-solid"
+                               id="baihoc_pass_zip"
+                               name="baihoc_pass_zip"
+                               placeholder="@lang('Pass Zip')"
+                               value="{{ $edit ? $baihoc->baihoc_pass_zip : old('baihoc_pass_zip') }}">
                     </div>
                 </div>
             </div>
@@ -160,8 +169,8 @@
             hideProgress()
             $('#upload_success').show();
             $('#baihoc_file').val(response.filename);
-            // $('#upload_file').hide();
             $('#start-upload-btn').prop('disabled', false);
+            $('#baihoc_pass_zip').prop('required', true);
         });
 
         resumable.on('fileError', function (file, response) { // trigger when there is any error

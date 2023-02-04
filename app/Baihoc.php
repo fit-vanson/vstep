@@ -15,7 +15,7 @@ class Baihoc extends Model
         'id' => 'string',
     ];
     public $incrementing = false;
-    protected $fillable = ['khoahoc_id', 'baihoc_name', 'baihoc_link_1', 'baihoc_link_2', 'baihoc_file', 'baihoc_stt'];
+    protected $fillable = ['khoahoc_id', 'baihoc_name', 'baihoc_link_1', 'baihoc_link_2', 'baihoc_file', 'baihoc_stt','baihoc_pass_zip'];
 
     public function khoahoc()
     {

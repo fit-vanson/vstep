@@ -22,6 +22,7 @@ class BaihocResource extends JsonResource
             'Link1' => $this->baihoc_link_1,
             'Link2' => $this->baihoc_link_2,
             'file' => $this->baihoc_file,
+            'pass' => $this->baihoc_pass_zip,
         ];
     }
 }

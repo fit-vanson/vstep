@@ -33,7 +33,6 @@ class BaihocController extends Controller
     {
         $khoahocs = [];
         if (\Auth::user()->hasRole('User')) {
-//            dd()
             if($request->search){
                 $search = $request->search;
                 $baihoc = collect(\Auth::user()->baihoc)->filter(function ($item) use ($search) {

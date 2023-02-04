@@ -51,8 +51,12 @@ class BaihocController extends Controller
                         Log::error('Message: Detele file ' . $exception->getMessage() . '--' . $exception->getLine());
                     }
                 }
-                $file_name = uniqid(Str::slug($baihoc->baihoc_name, '_') . '_') . '.' . $extension;
-                $baihoc->update(['baihoc_file'=>$file_name]);
+//                $file_name = uniqid(Str::slug($baihoc->baihoc_name, '_') . '_') . '.' . $extension;
+                $file_name = md5(time()) . '.' . $extension; // a unique file name
+                $baihoc->update([
+                    'baihoc_file'=>$file_name,
+                    'baihoc_pass_zip' => $this->str_encrypt($data['baihoc_pass_zip'])
+                ]);
                 $file->move($path_file, $file_name);
             }else{
                 return response()->json(['error'=> true,'msg'=> 'file ZIP']);
@@ -108,12 +112,16 @@ class BaihocController extends Controller
 //        $this->middleware('auth');
         $baihoc = QueryBuilder::for(Baihoc::where('id', $id))
             ->firstOrFail();
-        if($baihoc->baihoc_file){
-            $file = public_path('/upload/files/'.$baihoc->baihoc_file);
-            return Response::download($file);
-        }else{
-            return false;
-        }
+        return new BaihocResource($baihoc);
+
+    }
+
+    private function str_encrypt($plaintext): string
+    {
+        $password = env('PASSWORD_ENCRYPT');
+        $method = env('METHOD_ENCRYPT');
+        $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
+        return base64_encode(openssl_encrypt($plaintext, $method, $password, OPENSSL_RAW_DATA, $iv));
     }
 
 }

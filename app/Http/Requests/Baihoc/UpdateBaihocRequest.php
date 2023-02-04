@@ -14,8 +14,13 @@ class UpdateBaihocRequest extends Request
     public function rules()
     {
         $baihoc = $this->route('baihoc');
+        if (\request()->baihoc_file){
+            return [
+                'baihoc_name' => 'required|unique:baihocs,baihoc_name,' . $baihoc->id,
+                'baihoc_pass_zip' =>'required',
+            ];
+        }
         return [
-//            'cate_name' => 'required|regex:/^[a-zA-Z0-9\-_\.]+$/|unique:categories,cate_name,' . $category->id
             'baihoc_name' => 'required|unique:baihocs,baihoc_name,' . $baihoc->id
         ];
     }

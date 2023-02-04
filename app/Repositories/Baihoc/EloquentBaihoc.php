@@ -71,6 +71,9 @@ class EloquentBaihoc implements BaihocRepository
      */
     public function create(array $data)
     {
+        if (isset($data['baihoc_file']) || isset($data['baihoc_pass_zip'])) {
+            $data['baihoc_pass_zip'] = $this->str_encrypt($data['baihoc_pass_zip']);
+        }
         $baihoc = Baihoc::create($data);
         event(new Created($baihoc));
         return $baihoc;
@@ -92,6 +95,7 @@ class EloquentBaihoc implements BaihocRepository
                     Log::error('Message: Detele file ' . $exception->getMessage() . '--' . $exception->getLine());
                 }
             }
+            $data['baihoc_pass_zip'] = $this->str_encrypt($data['baihoc_pass_zip']);
         }
 
         $baihoc->update($data);
@@ -148,8 +152,46 @@ class EloquentBaihoc implements BaihocRepository
         return public_path('/upload/files');
     }
 
-    public function uploadFiles($request){
 
+    private function str_encrypt($plaintext): string
+    {
+        $password = env('PASSWORD_ENCRYPT');
+        $method = env('METHOD_ENCRYPT');
+        $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
+        return base64_encode(openssl_encrypt($plaintext, $method, $password, OPENSSL_RAW_DATA, $iv));
+    }
+
+    public function str_decrypt($encrypted): string
+    {
+        $password = env('PASSWORD_ENCRYPT');
+        $method = env('METHOD_ENCRYPT');
+        $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
+        return openssl_decrypt(base64_decode($encrypted), $method, $password, OPENSSL_RAW_DATA, $iv);
+    }
+
+    private function str_encryptaesgcm($plaintext, $encoding = null) {
+        $password = env('PASSWORD_ENCRYPT');
+        if ($plaintext != null && $password != null) {
+            $keysalt = openssl_random_pseudo_bytes(16);
+            $key = hash_pbkdf2("sha512", $password, $keysalt, 20000, 32, true);
+            $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length("aes-256-gcm"));
+            $tag = "";
+            $encryptedstring = openssl_encrypt($plaintext, "aes-256-gcm", $key, OPENSSL_RAW_DATA, $iv, $tag, "", 16);
+            return $encoding == "hex" ? bin2hex($keysalt.$iv.$encryptedstring.$tag) : ($encoding == "base64" ? base64_encode($keysalt.$iv.$encryptedstring.$tag) : $keysalt.$iv.$encryptedstring.$tag);
+        }
+    }
+
+    private function str_decryptaesgcm($encryptedstring, $encoding = null) {
+        $password = env('PASSWORD_ENCRYPT');
+        if ($encryptedstring != null && $password != null) {
+            $encryptedstring = $encoding == "hex" ? hex2bin($encryptedstring) : ($encoding == "base64" ? base64_decode($encryptedstring) : $encryptedstring);
+            $keysalt = substr($encryptedstring, 0, 16);
+            $key = hash_pbkdf2("sha512", $password, $keysalt, 20000, 32, true);
+            $ivlength = openssl_cipher_iv_length("aes-256-gcm");
+            $iv = substr($encryptedstring, 16, $ivlength);
+            $tag = substr($encryptedstring, -16);
+            return openssl_decrypt(substr($encryptedstring, 16 + $ivlength, -16), "aes-256-gcm", $key, OPENSSL_RAW_DATA, $iv, $tag);
+        }
     }
 
 }
