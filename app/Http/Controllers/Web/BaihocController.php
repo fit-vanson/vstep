@@ -133,6 +133,8 @@ class BaihocController extends Controller
     }
 
     public function uploadfile(Request $request){
+
+        dd(123);
         $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
         if (!$receiver->isUploaded()) {
             throw new UploadMissingFileException();
