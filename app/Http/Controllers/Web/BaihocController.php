@@ -134,7 +134,6 @@ class BaihocController extends Controller
 
     public function uploadfile(Request $request){
 
-        dd(123);
         $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
         if (!$receiver->isUploaded()) {
             throw new UploadMissingFileException();
@@ -146,8 +145,12 @@ class BaihocController extends Controller
             $extension = $file->getClientOriginalExtension();
             $fileName = md5(time()) . '.' . $extension; // a unique file name
 
-            $disk = Storage::disk('upload');
+//            $disk = Storage::disk('upload');
+//            $path = $disk->putFileAs('files', $file, $fileName);
+
+            $disk = Storage::disk(config('filesystems.default'));
             $path = $disk->putFileAs('files', $file, $fileName);
+
             // delete chunked file
             unlink($file->getPathname());
             return [
