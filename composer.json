@@ -28,7 +28,9 @@
     "require": {
         "php": "^8.0.2",
         "ext-json": "*",
+        "ext-openssl": "*",
         "akaunting/laravel-setting": "^1.2",
+        "alexusmai/laravel-file-manager": "^3.0",
         "anhskohbo/no-captcha": "3.*",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
@@ -47,8 +49,7 @@
         "vanguardapp/activity-log": "^4.0",
         "vanguardapp/announcements": "^4.0",
         "vanguardapp/plugins": "^4.0",
-        "webpatser/laravel-countries": "dev-master",
-        "ext-openssl": "*"
+        "webpatser/laravel-countries": "dev-master"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

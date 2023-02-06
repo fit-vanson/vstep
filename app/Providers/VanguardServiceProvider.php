@@ -28,6 +28,7 @@ class VanguardServiceProvider extends BaseVanguardServiceProvider
             \Vanguard\Support\Plugins\Categories::class,
             \Vanguard\Support\Plugins\Khoahoc::class,
             \Vanguard\Support\Plugins\Baihoc::class,
+            \Vanguard\Support\Plugins\FileManager::class,
             \Vanguard\UserActivity\UserActivity::class,
             \Vanguard\Support\Plugins\RolesAndPermissions::class,
             \Vanguard\Support\Plugins\Settings::class,

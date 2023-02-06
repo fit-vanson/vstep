@@ -67,6 +67,13 @@ class PermissionsSeeder extends Seeder
         ]);
 
         $permissions[] = Permission::create([
+            'name' => 'filemanager.manage',
+            'display_name' => 'Quản lý Files',
+            'description' => '',
+            'removable' => false
+        ]);
+
+        $permissions[] = Permission::create([
             'name' => 'categories.manage',
             'display_name' => 'Quản lý Thể loại',
             'description' => '',

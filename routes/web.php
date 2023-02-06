@@ -179,6 +179,13 @@ Route::group(['prefix' => env('ADMIN_DIR','admin')], function () {
         Route::post('baihoc/upload-file','BaihocController@uploadfile')->name('baihoc.uploadfile');
 
         /**
+         * File Manager
+         */
+
+        Route::resource('filemanager', 'FileManagerController')
+            ->except('show')->middleware('permission:filemanager.manage');
+
+        /**
          * Settings
          */
 
