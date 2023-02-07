@@ -111,8 +111,17 @@ class BaihocController extends Controller
     {
 //        $this->middleware('auth');
         $baihoc = QueryBuilder::for(Baihoc::where('id', $id))
-            ->firstOrFail();
-        return new BaihocResource($baihoc);
+            ->first();
+        if($baihoc){
+            if($baihoc->baihoc_file){
+                $file = public_path('/upload/files/'.$baihoc->baihoc_file);
+                return Response::download($file);
+            }
+        }
+        return response()->json(['msg'=>'not file']);
+
+
+//        return new BaihocResource($baihoc);
 
     }
 
