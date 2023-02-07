@@ -17,6 +17,8 @@ return [
     */
 
     'name' => 'Vstep',
+    'ADMIN_DIR' => 'admin',
+
 
     /*
     |--------------------------------------------------------------------------
@@ -144,6 +146,7 @@ return [
 
     'key' => env('APP_KEY', 'lsXxrP1d6nUGpfGO6vQqezNy1KCuDD3o'),
 
+    'PASSWORD_ENCRYPT' => 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
     'cipher' => 'AES-256-CBC',
 
     /*

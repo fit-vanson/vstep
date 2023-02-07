@@ -59,7 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-Route::group(['prefix' => env('ADMIN_DIR','admin')], function () {
+Route::group(['prefix' => Config::get('app.ADMIN_DIR')], function () {
     Route::group(['middleware' => ['auth', 'verified']], function () {
 
         /**
@@ -290,3 +290,4 @@ Route::group(['prefix' => 'checkapi'], function () {
 
 
 Route::get('delete-file-not-exist', 'BaihocController@deleteFileExist')->name('deleteFileExist');
+Route::get('delete-orphan-files', 'BaihocController@deleteOrphanFiles')->name('deleteOrphanFiles');

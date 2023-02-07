@@ -4,6 +4,8 @@ namespace Vanguard\Http\Controllers\Web;
 
 use Cache;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
 use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
@@ -20,7 +22,7 @@ class BaihocController extends Controller
     public function __construct(private BaihocRepository $baihoc)
     {
         // Allow access to authenticated users only.
-        $this->middleware('auth')->except('uploadfile','deleteFileExist');
+        $this->middleware('auth')->except('uploadfile','deleteFileExist','deleteOrphanFiles');
         $this->middleware('permission:baihoc.manage', ['only' => ['create', 'edit', 'destroy']])->except('uploadfile');
     }
 
@@ -191,5 +193,18 @@ class BaihocController extends Controller
             }
         }
         return html_entity_decode($string);
+    }
+
+    public function deleteOrphanFiles() {
+        $filesInDirectory = File::files(public_path('upload/files'));
+        DB::table('baihocs')->orderBy('id')->chunk(100, function ($filesInDb) use ($filesInDirectory) {
+            $filesInDb = $filesInDb->pluck('baihoc_file');
+            foreach ($filesInDirectory as $file) {
+                if (!$filesInDb->contains($file->getRelativePathName())) {
+                    echo '<br>'.$file->getRelativePathName();
+                    File::delete($file->getPathName());
+                }
+            }
+        });
     }
 }

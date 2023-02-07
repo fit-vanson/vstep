@@ -28,7 +28,7 @@ return [
      * Only used in the built-in controller.
      * * Use 'back' to redirect to the previous page
      */
-    'take_redirect_to' => '/'.env('ADMIN_DIR'),
+    'take_redirect_to' => '/'.Config::get('app.ADMIN_DIR'),
 
     /**
      * The URI to redirect after leaving an impersonation.
@@ -36,6 +36,6 @@ return [
      * Only used in the built-in controller.
      * Use 'back' to redirect to the previous page
      */
-    'leave_redirect_to' => '/'.env('ADMIN_DIR'),
+    'leave_redirect_to' => '/'.Config::get('app.ADMIN_DIR'),
 
 ];
