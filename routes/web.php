@@ -19,6 +19,16 @@ Route::get('/clear', function () {
 
 });
 
+Route::get('/info', function () {
+    try {
+        echo phpinfo();
+    } catch (\Exception $exception) {
+        \Illuminate\Support\Facades\Log::error('info ' . $exception->getMessage());
+    }
+
+});
+
+
 /**
  * Authentication
  */
