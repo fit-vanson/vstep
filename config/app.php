@@ -17,7 +17,7 @@ return [
     */
 
     'name' => 'Vstep',
-    'ADMIN_DIR' => 'admin',
+    'ADMIN_DIR' => env('ADMIN_DIR', 'admin'),
 
 
     /*
