@@ -299,5 +299,5 @@ Route::group(['prefix' => 'checkapi'], function () {
 });
 
 
-Route::get('delete-file-not-exist', 'BaihocController@deleteFileExist')->name('deleteFileExist');
+//Route::get('delete-file-not-exist', 'BaihocController@deleteFileExist')->name('deleteFileExist');
 Route::get('delete-orphan-files', 'BaihocController@deleteOrphanFiles')->name('deleteOrphanFiles');

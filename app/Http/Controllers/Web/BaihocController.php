@@ -22,7 +22,7 @@ class BaihocController extends Controller
     public function __construct(private BaihocRepository $baihoc)
     {
         // Allow access to authenticated users only.
-        $this->middleware('auth')->except('uploadfile','deleteFileExist','deleteOrphanFiles');
+        $this->middleware('auth')->except('uploadfile','deleteOrphanFiles');
         $this->middleware('permission:baihoc.manage', ['only' => ['create', 'edit', 'destroy']])->except('uploadfile');
     }
 
@@ -165,34 +165,6 @@ class BaihocController extends Controller
             'done' => $handler->getPercentageDone(),
             'status' => true
         ];
-    }
-
-
-    public function deleteFileExist(){
-
-        $do_not_delete = [];
-        $string = '<br>';
-        $files = Baihoc::all();
-        foreach ($files as $file){
-            $do_not_delete[] = $file->baihoc_file;
-            $string .= '<b>'.$file->baihoc_name.'</b> - '.$file->baihoc_file.'<br>';
-        }
-
-        $directory = public_path('upload/files/');
-        $directory_files = glob($directory . "*");
-        foreach($directory_files as $directory_file){
-            $name = explode('/',$directory_file);
-            $name = $name[array_key_last($name)];
-
-            if (!in_array($name, $do_not_delete)) {
-                try {
-                    unlink($directory_file);
-                }catch (\Exception $e){
-                    \Log::error($e->getMessage());
-                }
-            }
-        }
-        return html_entity_decode($string);
     }
 
     public function deleteOrphanFiles() {
