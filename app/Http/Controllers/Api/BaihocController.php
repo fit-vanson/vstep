@@ -98,11 +98,14 @@ class BaihocController extends Controller
     }
 
     public function baihocByUser($userName,Request $request){
-        $this->middleware('auth');
+//        $this->middleware('auth');
         $user = QueryBuilder::for(User::where('username', $userName))
             ->first();
-        $baihocs = $user->baihoc->all();
-
+        if(!$user->hasRole('User')){
+            $baihocs = Baihoc::all();
+        }else{
+            $baihocs = $user->baihoc->all();
+        }
         $baihocsResource = BaihocResource::collection($baihocs);
         return response()->json($baihocsResource);
     }
